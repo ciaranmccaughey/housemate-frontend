@@ -1,0 +1,20 @@
+.header-container {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-icon {
+    display: flex;
+    margin: 10px;
+}
+.header-title-container {
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+}
+.header-title {
+    display: block;
+    font-size: 25px;
+}
