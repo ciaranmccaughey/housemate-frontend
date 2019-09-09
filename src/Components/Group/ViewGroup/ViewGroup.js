@@ -4,6 +4,7 @@ import './ViewGroup.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronLeft';
 import { faCog } from '@fortawesome/free-solid-svg-icons/faCog';
+import Expense from '../../Expense/Expense';
 
 
 
@@ -17,7 +18,7 @@ const ViewGroup = ({ group, showArea }) => {
     }
 
     if (view === 'expenses') {
-        render = <div>Expenses</div>
+        render = <Expense />
     }
 
     if (view === 'm8s') {
