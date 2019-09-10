@@ -8,7 +8,6 @@ const AddGroup = props => {
 
     const onAddGroup = async () => {
 
-        console.log(name)
         const postData = {
             action: 'create',
             user_id: 7,
@@ -19,8 +18,7 @@ const AddGroup = props => {
         if (success) {
 			// update groups state
 			props.showArea("list");
-			console.log('success', success);
-
+			props.addGroup({id: data.id, name: name});
             // return to main app
         }
     }
