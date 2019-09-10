@@ -1,16 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Nav from '../../Nav/Nav';
 import './ViewGroup.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronLeft';
 import { faCog } from '@fortawesome/free-solid-svg-icons/faCog';
 import Expense from '../../Expense/Expense';
+import axios from 'axios';
+// import Context from '../../../context';
 
-
-
-const ViewGroup = ({ group, showArea }) => {
+const ViewGroup = ({ group, showArea, categories }) => {
 
     const [ view, setView ] = useState('overview');
+    const [ expenses, setExpenses ] = useState([]);
+    // const { state } = useContext(Context);
+
+    useEffect(() => {
+        getExpenses();
+    }, []);
+
+    const getExpenses = async () => {
+        const res = await axios.get("http://housem8.local/api/expense/index.php?action=getExpenses&group_id="+ group.id);
+		console.log(res)
+
+        if (res.data) {
+			const { data, success, message } = res.data;
+			if (success) {
+                setExpenses(data);
+			}
+		}
+    }
+
 
     let render = null;
     if (view === 'overview') {
@@ -18,7 +37,7 @@ const ViewGroup = ({ group, showArea }) => {
     }
 
     if (view === 'expenses') {
-        render = <Expense />
+        render = <Expense categories={categories} group={group} expenses={expenses} />
     }
 
     if (view === 'm8s') {

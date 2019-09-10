@@ -8,11 +8,13 @@ class Group extends Component {
 	state = {
 		groups: [],
 		selectedGroup: null,
-		showArea: "list"
+		showArea: "list",
+		categories: []
 	};
 
 	componentDidMount() {
 		this.getGroups();
+		this.getCategories();
 	}
 
 	getGroups = async () => {
@@ -25,6 +27,18 @@ class Group extends Component {
 			}
 		}
 	};
+
+	getCategories = async () => {
+		const res = await axios.get("http://housem8.local/api/category/index.php?action=getCategories");
+
+		if (res.data) {
+			const { data, success, message } = res.data;
+			if (success) {
+				this.setState({ categories: data });
+			}
+		}
+	};
+
 
 	showArea = area => {
 		this.setState({ showArea: area });
@@ -47,7 +61,7 @@ class Group extends Component {
 		}
 
 		if (this.state.showArea == "view") {
-			render = <ViewGroup group={this.state.selectedGroup} showArea={this.showArea} />;
+			render = <ViewGroup group={this.state.selectedGroup} showArea={this.showArea} categories={this.state.categories} />;
 		}
 
 		return <>{render}</>;
