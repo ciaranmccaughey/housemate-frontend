@@ -19,7 +19,6 @@ class Group extends Component {
 
 	getGroups = async () => {
 		const res = await axios.get("http://housem8.local/api/group/index.php?action=getGroups&user_id=" + 7);
-
         if (res.data) {
 			const { data, success, message } = res.data;
 			if (success) {

@@ -6,9 +6,10 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronLeft';
 import { faCog } from '@fortawesome/free-solid-svg-icons/faCog';
 import Expense from '../../Expense/Expense';
 import axios from 'axios';
+import Mate from '../../Mate/Mate';
 // import Context from '../../../context';
 
-const ViewGroup = ({ group, showArea, categories }) => {
+const ViewGroup = ({ group, showArea, categories, mates }) => {
 
     const [ view, setView ] = useState('overview');
     const [ expenses, setExpenses ] = useState([]);
@@ -19,8 +20,8 @@ const ViewGroup = ({ group, showArea, categories }) => {
     }, []);
 
     const getExpenses = async () => {
+        console.log('getExpenses', group)
         const res = await axios.get("http://housem8.local/api/expense/index.php?action=getExpenses&group_id="+ group.id);
-		console.log(res)
 
         if (res.data) {
 			const { data, success, message } = res.data;
@@ -29,7 +30,6 @@ const ViewGroup = ({ group, showArea, categories }) => {
 			}
 		}
     }
-
 
     let render = null;
     if (view === 'overview') {
@@ -41,7 +41,7 @@ const ViewGroup = ({ group, showArea, categories }) => {
     }
 
     if (view === 'm8s') {
-        render = <div>m8s</div>
+        render = <Mate group={group} />
     }
 
     return(
