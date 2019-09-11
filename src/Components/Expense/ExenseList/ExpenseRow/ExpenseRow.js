@@ -12,7 +12,7 @@ const ExpenseRow = props => {
 				</div>
 			</div>
 			<div className="expense-row-container">
-				<div>{expense.amount}</div>
+				<div>£{expense.amount}</div>
 				<div>{expense.user.name}</div>
 			</div>
 
@@ -26,6 +26,11 @@ const ExpenseRow = props => {
 						.join("-")}
 				</div>
 			</div>
+			<div className="bottom-container">
+				<div>{expense.comment}</div>
+
+			</div>
+
 		</div>
 	);
 };

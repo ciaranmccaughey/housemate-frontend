@@ -6,7 +6,7 @@ const Expense = props => {
 
     const [ view, setView ] = useState('list');
     
-    const { group, expenses, categories } = props;
+    const { group, expenses, categories, setExpenses } = props;
 
     let render = null;
 
@@ -15,7 +15,7 @@ const Expense = props => {
     }
 
     if (view == 'add') {
-        render = <AddExpense categories={categories} group={group} />;
+        render = <AddExpense categories={categories} group={group} setView={setView} expenses={expenses} setExpenses={setExpenses} />;
     }
 
     return (

@@ -47,7 +47,7 @@ class Login extends Component {
 	render() {
 		return (
 			<div className="container is-flex" style={{ justifyContent: "center", alignItems: "center" }}>
-				<div className="box">
+				<div className="box" style={{ minWidth: "80%"}}>
 					<div className="field">
 						<label className="label">Email</label>
 						<div className="control">

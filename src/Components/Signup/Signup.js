@@ -45,7 +45,7 @@ class Signup extends Component {
 	render() {
 		return (
 			<div className="container is-flex" style={{justifyContent: 'center', alignItems: 'center'}}>
-				<div className="box" >
+				<div className="box"  style={{ minWidth: "80%"}}>
 					<label className="label">Name</label>
 					<div className="field">
 						<div className="control">

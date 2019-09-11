@@ -37,7 +37,7 @@ const ViewGroup = ({ group, showArea, categories }) => {
     }
 
     if (view === 'expenses') {
-        render = <Expense categories={categories} group={group} expenses={expenses} />
+        render = <Expense categories={categories} group={group} expenses={expenses} setExpenses={setExpenses} />
     }
 
     if (view === 'm8s') {

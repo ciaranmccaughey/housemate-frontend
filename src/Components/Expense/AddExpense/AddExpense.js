@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from 'axios';
+import ExpenseList from "../ExenseList/ExpenseList";
 
 const AddExpense = props => {
 	
@@ -14,12 +15,16 @@ const AddExpense = props => {
             ...values
         }
 		const res = await axios.post('http://housem8.local/api/expense/index.php', postData)
-		console.log(res);
-        // const { data, success, message } = res.data;
-        if (true) {
-			// update groups state
+        const { data, success, message } = res.data;
+        if (success) {
+			props.setView('list');
 			
-            // return to main app
+			if (props.expenses.length) {
+				props.setExpenses([...props.expenses, data])
+			} else {
+				props.setExpenses([data])
+
+			}
         }
 	};
 
