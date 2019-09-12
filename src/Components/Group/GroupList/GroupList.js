@@ -14,7 +14,7 @@ const GroupList = props => {
 			) : null}
 			<div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
 				{!props.groups.length ? <h2>Try adding a group</h2> : null}
-				<button className="button is-link" onClick={() => props.showArea("add")}>
+				<button id="add-group-button" className="button is-link" onClick={() => props.showArea("add")}>
 					Add Group
 				</button>
 			</div>
