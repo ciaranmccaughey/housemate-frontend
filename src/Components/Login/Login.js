@@ -51,7 +51,7 @@ class Login extends Component {
 					<div className="field">
 						<label className="label">Email</label>
 						<div className="control">
-							<input className="input" type="email" placeholder="email" value={this.state.email} onChange={this.handleChange} name="email" />
+							<input className="input" type="email" placeholder="email" value={this.state.email} onChange={this.handleChange} name="email" id="email" />
 						</div>
 					</div>
 
@@ -64,7 +64,7 @@ class Login extends Component {
 
                     <div className="field is-grouped">
 						<div className="control">
-							<button className="button is-link" onClick={this.loginSubmit} disabled={this.state.isLoading}>
+							<button id="login-button" className="button is-link" onClick={this.loginSubmit} disabled={this.state.isLoading}>
 								Login
 							</button>
 						</div>
