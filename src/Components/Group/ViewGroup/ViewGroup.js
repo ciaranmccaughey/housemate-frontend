@@ -9,18 +9,16 @@ import axios from 'axios';
 import Mate from '../../Mate/Mate';
 // import Context from '../../../context';
 
-const ViewGroup = ({ group, showArea, categories, mates }) => {
+const ViewGroup = ({ group, showArea, categories, addMateToGroup }) => {
 
     const [ view, setView ] = useState('overview');
     const [ expenses, setExpenses ] = useState([]);
-    // const { state } = useContext(Context);
 
     useEffect(() => {
         getExpenses();
     }, []);
 
     const getExpenses = async () => {
-        console.log('getExpenses', group)
         const res = await axios.get("http://housem8.local/api/expense/index.php?action=getExpenses&group_id="+ group.id);
 
         if (res.data) {
@@ -41,7 +39,7 @@ const ViewGroup = ({ group, showArea, categories, mates }) => {
     }
 
     if (view === 'm8s') {
-        render = <Mate group={group} />
+        render = <Mate group={group} addMateToGroup={addMateToGroup} />
     }
 
     return(

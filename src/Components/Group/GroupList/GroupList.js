@@ -2,6 +2,7 @@ import React from "react";
 import GroupRow from "./GroupRow/GroupRow";
 
 const GroupList = props => {
+
 	return (
 		<>
 			{props.groups.length ? (

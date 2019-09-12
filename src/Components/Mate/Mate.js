@@ -4,22 +4,19 @@ import MateList from './MateList/MateList';
 
 const Mate = props => {
 
-    const { group } = props;
-
-    console.log(props)
+    const { group, addMateToGroup } = props;
 
     const [ view, setView ] = useState('list');
-    const [ mates, setMates ] = useState([...group.users]);
-    
+
 
     let render = null;
 
     if (view == 'list') {
-        render = <MateList mates={mates} />
+        render = <MateList mates={group.users} />
     }
 
     if (view == 'add') {
-        render = <AddMate group={group} mates={mates} setMates={setMates} setView={setView} />
+        render = <AddMate group={group} addMateToGroup={addMateToGroup} setView={setView} />
     }
 
     return (

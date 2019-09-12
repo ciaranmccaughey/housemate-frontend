@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const AddMate = props => {
 
-    const { group, mates, setMates, setView } = props;
+    const { group, addMateToGroup, setView } = props;
 
 
     const addMate = async values => {
@@ -21,12 +21,7 @@ const AddMate = props => {
         const { data, success, message } = res.data;
         if (success) {
 
-			if (mates) {
-				setMates([...mates, data]);
-			} else {
-				setMates([data]);
-			}
-			
+			addMateToGroup(data);
 			setView('list');
         }
     }

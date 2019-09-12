@@ -7,7 +7,7 @@ const MateList = props => {
 
     return (
         <div style={{ height: "100%", overflow: "scroll", marginBottom: "65px"}}>
-            {mates.length ? mates.map(mate => <MateRow key={mate.id} mate={mate} />)
+            {mates ? mates.map(mate => <MateRow key={mate.id} mate={mate} />)
             : null
             }
         </div>

@@ -18,7 +18,7 @@ const AddGroup = props => {
         if (success) {
 			// update groups state
 			props.showArea("list");
-			props.addGroup({id: data.id, name: name});
+			props.addGroup({id: data.id, name: name, users: []});
             // return to main app
         }
     }

@@ -38,6 +38,26 @@ class Group extends Component {
 		}
 	};
 
+	addMateToGroup = mate => {
+
+		// add mate to the selected group
+		const selectedGroup = this.state.selectedGroup;
+		selectedGroup.users.push(mate);
+
+		// update the groups state
+		const groups = this.state.groups.map(group => {
+			if (group.id === selectedGroup.id) {
+				return selectedGroup;
+			}
+			return group;
+		})
+		
+		this.setState({
+			groups: groups,
+			selectedGroup: selectedGroup
+		})
+
+	}
 
 	showArea = area => {
 		this.setState({ showArea: area });
@@ -48,7 +68,12 @@ class Group extends Component {
 	};
 
 	addGroup = group => {
-		const groups = [...this.state.groups, group];
+		let groups = null;
+		if (this.state.groups.length) {
+			groups = [...this.state.groups, group];
+		} else {
+			groups = [group];
+		}
 		this.setState({ groups: groups});
 	}
 
@@ -60,7 +85,7 @@ class Group extends Component {
 		}
 
 		if (this.state.showArea == "view") {
-			render = <ViewGroup group={this.state.selectedGroup} showArea={this.showArea} categories={this.state.categories} />;
+			render = <ViewGroup group={this.state.selectedGroup} showArea={this.showArea} categories={this.state.categories} addMateToGroup={this.addMateToGroup} />;
 		}
 
 		return <>{render}</>;
