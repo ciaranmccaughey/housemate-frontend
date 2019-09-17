@@ -3,16 +3,19 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import ExpenseList from "../ExenseList/ExpenseList";
+import './AddExpense.sass';
 
 const ExpenseForm = props => {
-	const { addExpense } = props;
+	const { addExpenseDetails } = props;
 
 	return (
 		<div>
 			<Formik
 				initialValues={{ description: "", amount: "", comment: "", category_id: "", purchased_date: new Date() }}
 				onSubmit={(values, { setSubmitting }) => {
-					addExpense(values);
+					console.log('onSubmit', values);
+
+					addExpenseDetails(values);
 				}}
 				// validationSchema={Yup.object().shape({
 				// 	email: Yup.string()
@@ -91,9 +94,15 @@ const ExpenseForm = props => {
 									/>
 								</div>
 							</div>
-
-							<button type="submit" className="button is-link"  style={{width: "100%"}}>
-								Next
+							
+							<button type="submit" className="button is-primary"  style={{width: "100%"}}>
+								Split with m8s
+							</button>
+							<button type="button" className="button is-link"  style={{width: "100%", marginTop: "8px"}} onClick={() => {
+								console.log('clicked', values);
+								addExpenseDetails(values, true);
+								}}>
+								Add expense
 							</button>
 						</form>
 					);

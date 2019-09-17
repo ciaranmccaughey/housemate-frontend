@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle';
+import './SelectPayer.sass';
 
 const SelectPayer = ({ mates, setPayer }) => {
     
@@ -8,14 +9,14 @@ const SelectPayer = ({ mates, setPayer }) => {
 	
 	return (
 		<>
-		<h1>Who paid?</h1>
+		<div style={{fontSize: "24px", fontWeight: "bold"}}>Who paid?</div>
 			{mates
 				? mates.map((mate, index) => {
 						return (
-							<div className="box" onClick={() => setSelected(index)}>
+							<div onClick={() => setSelected(index)} className={ index == selected ? 'box selected-payer-box' : 'box'} style={{ margin: "10px" }}>
 								<div style={{display: 'flex', justifyContent: 'space-between',}}>
-									<div style={ index == selected ? {color: 'green', fontSize: '20px'} : {}}><FontAwesomeIcon icon={faCheckCircle} /></div>
-									<div style={ index == selected ? {fontWeight: 'bold'} : {}}>{mate.name}</div>
+									<div className={ index == selected ? 'selected-payer-icon' : ''}><FontAwesomeIcon icon={faCheckCircle} /></div>
+									<div className={ index == selected ? 'selected-payer-name' : ''}>{mate.name}</div>
 								</div>
 							</div>
 						);
@@ -30,3 +31,6 @@ const SelectPayer = ({ mates, setPayer }) => {
 };
 
 export default SelectPayer;
+
+
+// 
