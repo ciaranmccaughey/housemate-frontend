@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons/faCheckCircle";
 import SplitEven from "./SplitEven/SplitEven";
+import './Split.sass';
 
 class Split extends Component {
 	state = {
@@ -40,27 +41,23 @@ class Split extends Component {
 						const amount = this.props.expense.amount / this.state.numberOfMates;
 
 						return (
-							<div className="box" onClick={() => this.removeMate(mate)}>
-								<div style={{ display: "flex", justifyContent: "space-between" }}>
-									<div style={{ color: "green", fontSize: "20px" }}>
-										<FontAwesomeIcon icon={faCheckCircle} />
-									</div>
 
-									<div>{mate.name}</div>
+							<div key={index} className="box selected-split-box" onClick={() => this.removeMate(mate)} style={{ margin: "5px 5px" }}>
+								<div style={{display: 'flex', justifyContent: 'space-between',}}>
+									<div className='selected-split-icon'><FontAwesomeIcon icon={faCheckCircle} /></div>
+									<div className='selected-split-name'>{mate.name}</div>
 									<div>£{(Math.round(amount * 100) / 100).toFixed(2)}</div>
 								</div>
 							</div>
+							
 						);
 					})}
 
 					{this.state.excludeMates.map((mate, index) => {
 						return (
-							<div className="box" onClick={() => this.addMate(mate)}>
+							<div key={index * 10} className="box" onClick={() => this.addMate(mate)} style={{ margin: "5px 5px" }}>
 								<div style={{ display: "flex", justifyContent: "space-between" }}>
-									<div style={{ color: "red", fontSize: "20px" }}>
-										<FontAwesomeIcon icon={faCheckCircle} />
-									</div>
-
+									<div><FontAwesomeIcon icon={faCheckCircle} /></div>
 									<div>{mate.name}</div>
 									<div>£0</div>
 								</div>

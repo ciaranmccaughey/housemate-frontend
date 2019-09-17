@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import AddExpense from './AddExpense/AddExpense';
 import ExpenseList from './ExenseList/ExpenseList';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
+import './Expense.sass';
 
 const LIST = 'list';
 const ADD = 'add';
@@ -23,7 +26,7 @@ const Expense = props => {
 
     return (
         <div style={{ display: "flex", flexDirection: "column"}}>
-            {view != ADD ? <button className="button is-link" style={{ margin: "0 2%"}} onClick={() => setView(ADD)}>Add Expense</button> : null}
+            {view != ADD ? <button className="button is-link floating-button" onClick={() => setView(ADD)}><FontAwesomeIcon icon={faPlus} /></button> : null}
             {render}
         </div>
     )

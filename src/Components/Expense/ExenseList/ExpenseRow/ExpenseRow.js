@@ -5,7 +5,7 @@ const ExpenseRow = props => {
 	const { expense } = props;
 
 	return (
-		<div className="box expense-row-box" onClick={() => console.log(expense)}>
+		<div className="expense-row-box" onClick={() => console.log(expense)}>
 			<div className="expense-row-header">
 				<div className="expense-row-container">
 					<div>{expense.name}</div>

@@ -71,12 +71,14 @@ const AddExpense = props => {
 		console.log(data);
 		if (success) {
 
-			// console.log('sucessss matteeeee');
-			// if (props.expenses.length) {
-			// 	props.setExpenses([...props.expenses, data]);
-			// } else {
-			// 	props.setExpenses([data]);
-			// }
+			console.log('sucessss matteeeee');
+			if (props.expenses.length) {
+				props.setExpenses([...props.expenses, data]);
+			} else {
+				props.setExpenses([data]);
+			}
+
+			props.setView("list");
 		}
 	}
 
