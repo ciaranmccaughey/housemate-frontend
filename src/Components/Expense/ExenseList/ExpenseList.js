@@ -4,6 +4,8 @@ import './ExpenseList.sass';
 
 const ExpenseList = props => {
     console.log(props)
+    const { expenses, viewExpense } = props;
+
     return (
         <>
             <div className="list-container">
@@ -15,7 +17,7 @@ const ExpenseList = props => {
                         {/* {props.group.users ? props.group.users.map(mate => <div className="expense-list-filter-mate">{mate.name}</div>) : null} */}
                     </div>
                 </div>
-                {props.expenses.length ? props.expenses.map(expense => <ExpenseRow key={expense.id} expense={expense} />)
+                {expenses.length ? expenses.map(expense => <ExpenseRow key={expense.id} expense={expense} viewExpense={viewExpense} />)
                 : null
                 }
             </div>

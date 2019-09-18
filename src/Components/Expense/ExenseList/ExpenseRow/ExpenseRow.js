@@ -2,10 +2,10 @@ import React from "react";
 import "./ExpenseRow.sass";
 
 const ExpenseRow = props => {
-	const { expense } = props;
+	const { expense, viewExpense } = props;
 
 	return (
-		<div className="expense-row-box" onClick={() => console.log(expense)}>
+		<div className="expense-row-box" onClick={() => viewExpense(expense)}>
 			<div className="expense-row-header">
 				<div className="expense-row-container">
 					<div>{expense.name}</div>
