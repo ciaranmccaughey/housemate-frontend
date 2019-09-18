@@ -8,7 +8,7 @@ const ExpenseList = props => {
         <>
             <div className="list-container">
                 <div className="expense-list-header" style={{display: 'flex'}}>
-                    <div className="expense-list-title">My Group</div>
+                    <div className="expense-list-title">Expenses</div>
                     <div className="expense-list-total">Total: $200</div>
                     <div className="expense-list-filter-container">
                         {/* <div className="expense-list-filter-title">m8s</div> */}

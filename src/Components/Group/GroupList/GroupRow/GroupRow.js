@@ -2,8 +2,12 @@ import React from "react";
 
 const GroupRow = ({ group, groupSelected }) => {
 	return (
-		<div id="group-container" className="box" style={{margin: "10px 10px"}} onClick={() => groupSelected(group)}>
-			<h1 id="group-heading">{group.name}</h1>
+		<div className="expense-row-box"  onClick={() => groupSelected(group)}>
+			<div className="expense-row-header">
+				<div className="expense-row-container">
+					<div>{group.name}</div>
+				</div>
+			</div>
 		</div>
 	);
 };

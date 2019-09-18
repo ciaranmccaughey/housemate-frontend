@@ -31,7 +31,18 @@ const ViewGroup = ({ group, showArea, categories, addMateToGroup }) => {
 
 	let render = null;
 	if (view === "overview") {
-		render = <div>Overview</div>;
+		render = (
+			<div>
+				<div className="expense-list-header" style={{ display: "flex" }}>
+					<div className="expense-list-title">My Group</div>
+					<div className="expense-list-total">Total: $200</div>
+					<div className="expense-list-filter-container">
+						{/* <div className="expense-list-filter-title">m8s</div> */}
+						{/* {props.group.users ? props.group.users.map(mate => <div className="expense-list-filter-mate">{mate.name}</div>) : null} */}
+					</div>
+				</div>
+			</div>
+		);
 	}
 
 	if (view === "expenses") {
@@ -44,15 +55,17 @@ const ViewGroup = ({ group, showArea, categories, addMateToGroup }) => {
 
 	return (
 		<div>
-			{false ? <div className="header-container">
-				<div className="back-icon">
-					<FontAwesomeIcon icon={faChevronLeft} onClick={() => showArea("list")} />
+			{false ? (
+				<div className="header-container">
+					<div className="back-icon">
+						<FontAwesomeIcon icon={faChevronLeft} onClick={() => showArea("list")} />
+					</div>
+					<span className="header-title">{group.name}</span>
+					<div className="back-icon">
+						<FontAwesomeIcon icon={faCog} />
+					</div>
 				</div>
-				<span className="header-title">{group.name}</span>
-				<div className="back-icon">
-					<FontAwesomeIcon icon={faCog} />
-				</div>
-			</div> : null}
+			) : null}
 
 			<div className="app-bg">{render}</div>
 
