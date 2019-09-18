@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Nav.css";
+import "./Nav.sass";
 import NavItem from "./NavItem";
 import { faChartLine } from "@fortawesome/free-solid-svg-icons/faChartLine";
 import { faWallet } from "@fortawesome/free-solid-svg-icons/faWallet";

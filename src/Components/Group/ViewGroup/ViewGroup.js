@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import Nav from "../../Nav/Nav";
-import "./ViewGroup.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons/faChevronLeft";
 import { faCog } from "@fortawesome/free-solid-svg-icons/faCog";
 import Expense from "../../Expense/Expense";
 import axios from "axios";
 import Mate from "../../Mate/Mate";
+import "./ViewGroup.sass";
+
 // import Context from '../../../context';
 
 const ViewGroup = ({ group, showArea, categories, addMateToGroup }) => {
@@ -43,7 +44,7 @@ const ViewGroup = ({ group, showArea, categories, addMateToGroup }) => {
 
 	return (
 		<div>
-			<div className="header-container">
+			{true ? <div className="header-container">
 				<div className="back-icon">
 					<FontAwesomeIcon icon={faChevronLeft} onClick={() => showArea("list")} />
 				</div>
@@ -51,9 +52,9 @@ const ViewGroup = ({ group, showArea, categories, addMateToGroup }) => {
 				<div className="back-icon">
 					<FontAwesomeIcon icon={faCog} />
 				</div>
-			</div>
+			</div> : null}
 
-			<div>{render}</div>
+			<div className="app-bg">{render}</div>
 
 			<Nav view={view} setView={setView} />
 		</div>

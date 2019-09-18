@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -8,20 +8,23 @@ import './AddExpense.sass';
 const ExpenseForm = props => {
 	const { addExpenseDetails } = props;
 
+	const [ splitExpense, setSplitExpense ] = useState();
+
 	return (
 		<div>
 			<Formik
 				initialValues={{ description: "", amount: "", comment: "", category_id: "", purchased_date: new Date() }}
 				onSubmit={(values, { setSubmitting }) => {
-					console.log('onSubmit', values);
-
-					addExpenseDetails(values);
+					addExpenseDetails(values, splitExpense);
 				}}
-				// validationSchema={Yup.object().shape({
-				// 	email: Yup.string()
-				// 		.email()
-				// 		.required("Required")
-				// })}
+				validationSchema={Yup.object().shape({
+					description: Yup.string()
+						.required("Required"),
+					amount: Yup.string()
+						.required("Required"),
+					category_id: Yup.string()
+						.required("Required")
+				})}
 			>
 				{formikProps => {
 					const { values, touched, errors, dirty, isSubmitting, handleChange, handleBlur, handleSubmit, handleReset } = formikProps;
@@ -32,8 +35,9 @@ const ExpenseForm = props => {
 									Description
 								</label>
 								<div className="control">
-									<input id="description" placeholder="Enter your expense" type="text" value={values.name} onChange={handleChange} onBlur={handleBlur} className="input" />
+									<input id="description" placeholder="Enter your expense" type="text" value={values.name} onChange={handleChange} onBlur={handleBlur} className={'input ' + (errors.description && touched.description ? 'is-danger' : '')} />
 								</div>
+								{errors.description && touched.description ? <p className="help is-danger">Please enter a description.</p> : null}
 							</div>
 
 							<div className="field">
@@ -41,8 +45,9 @@ const ExpenseForm = props => {
 									Amount ($)
 								</label>
 								<div className="control">
-									<input id="amount" placeholder="Enter your Amount" type="text" value={values.amount} onChange={handleChange} onBlur={handleBlur} className="input" />
+									<input id="amount" placeholder="Enter your Amount" type="text" value={values.amount} onChange={handleChange} onBlur={handleBlur} className={'input ' + (errors.amount && touched.amount ? 'is-danger' : '')} />
 								</div>
+								{errors.amount && touched.amount ? <p className="help is-danger">Please enter an amount.</p> : null}
 							</div>
 
 							<div className="field">
@@ -50,13 +55,15 @@ const ExpenseForm = props => {
 									Category
 								</label>
 								<div className="select is-medium">
-									<select name="category_id" value={values.color} onChange={handleChange} onBlur={handleBlur} style={{ display: "block" }}>
+									<select name="category_id" value={values.color} onChange={handleChange} onBlur={handleBlur} style={{ display: "block" }} className={'input ' + (errors.category_id && touched.category_id ? 'is-danger' : '')}>
 										<option value="" label="Select a Category" />
 										{props.categories.map(category => (
 											<option key={category.id} value={category.id} label={category.name} />
 										))}
 									</select>
 								</div>
+								{errors.category_id && touched.category_id ? <p className="help is-danger">Please enter a category.</p> : null}
+
 							</div>
 
 							<div className="field">
@@ -95,13 +102,15 @@ const ExpenseForm = props => {
 								</div>
 							</div>
 							
-							<button type="submit" className="button is-primary"  style={{width: "100%"}}>
+							<button type="submit" className="button is-primary"  style={{width: "100%"}} onClick={() => setSplitExpense(false)}>
 								Split with m8s
 							</button>
-							<button type="button" className="button is-link"  style={{width: "100%", marginTop: "8px"}} onClick={() => {
-								console.log('clicked', values);
-								addExpenseDetails(values, true);
-								}}>
+							<button type="submit" className="button is-link"  style={{width: "100%", marginTop: "8px"}} 
+							onClick={() => {
+								// console.log('clicked', values);
+								setSplitExpense(true);
+								}}
+								>
 								Add expense
 							</button>
 						</form>

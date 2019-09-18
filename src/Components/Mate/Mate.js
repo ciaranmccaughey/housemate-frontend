@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import AddMate from './AddMate/AddMate';
 import MateList from './MateList/MateList';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 
 const Mate = props => {
 
@@ -21,7 +23,7 @@ const Mate = props => {
 
     return (
         <div style={{ display: "flex", flexDirection: "column" }}>
-            {view != 'add' ? <button className="button is-link" style={{ margin: "0 2%"}} onClick={() => setView('add')}>Add m8</button> : null}
+            {view != 'add' ? <button className="button is-link floating-button" style={{ margin: "0 2%"}} onClick={() => setView('add')}><FontAwesomeIcon icon={faPlus} /></button> : null}
             {render}
         </div>
     )

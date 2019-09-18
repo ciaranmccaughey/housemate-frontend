@@ -12,13 +12,13 @@ const ExpenseRow = props => {
 				</div>
 			</div>
 			<div className="expense-row-container">
-				<div>£{expense.amount}</div>
-				<div>{expense.user.name}</div>
+				<div className="expense-row-amount">£{expense.amount}</div>
+				<div className="expense-row-users-name">{expense.user.name}</div>
 			</div>
 
 			<div className="bottom-container">
-				<div>{expense.category.name}</div>
-				<div>
+				<div className="expense-row-category">{expense.category.name}</div>
+				<div className="expense-row-date">
 					{expense.purchased_date
 						.split(" ")[0]
 						.split("-")
@@ -27,7 +27,7 @@ const ExpenseRow = props => {
 				</div>
 			</div>
 			<div className="bottom-container">
-				<div>{expense.comment}</div>
+				<div className="expense-row-comment">{expense.comment}</div>
 
 			</div>
 

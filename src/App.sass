@@ -10,10 +10,16 @@ $brown: #757763;
 $beige-light: #d0d1cd;
 $beige-lighter: #eff0eb;
 
+$test-primary: #002447;
+$test-secondary: #52d3d1;
+// $primary: $test-primary;
+// $link: $test-secondary;
+
+
 // Update Bulma's global variables
 $family-sans-serif: 'Nunito', sans-serif;
-$grey-dark: $brown;
-$grey-light: $beige-light;
+// $grey-dark: $brown;
+// $grey-light: $beige-light;
 $primary: $purple;
 $link: $pink;
 // $widescreen-enabled: false;
@@ -24,3 +30,15 @@ $my-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.2), 0 0 0 1px rgba(10, 10, 10, 0.1)
 
 // Import only what you need from Bulma
 @import "../node_modules/bulma/bulma.sass"
+
+.app-bg 
+    // background: $link;
+
+.floating-button
+    border-radius: 50%
+    width: 55px
+    height: 55px
+    position: fixed
+    bottom: 80px
+    right: 10px
+    box-shadow: 0 3px 3px rgba(10, 10, 10, 0.2), 0 0 0 1px rgba(10, 10, 10, 0.1)

@@ -22,6 +22,7 @@ class Group extends Component {
         if (res.data) {
 			const { data, success, message } = res.data;
 			if (success) {
+				console.log('grouos', data);
 				this.setState({ groups: data });
 			}
 		}
