@@ -44,7 +44,7 @@ const ViewGroup = ({ group, showArea, categories, addMateToGroup }) => {
 
 	return (
 		<div>
-			{true ? <div className="header-container">
+			{false ? <div className="header-container">
 				<div className="back-icon">
 					<FontAwesomeIcon icon={faChevronLeft} onClick={() => showArea("list")} />
 				</div>

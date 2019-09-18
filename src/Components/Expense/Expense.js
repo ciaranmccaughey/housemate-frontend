@@ -17,7 +17,7 @@ const Expense = props => {
     let render = null;
 
     if (view == LIST) {
-        render = <ExpenseList expenses={expenses} />;
+        render = <ExpenseList expenses={expenses} group={group} />;
     }
 
     if (view == ADD) {

@@ -4,7 +4,7 @@ const MateRow = props => {
 	const { mate } = props;
 
 	return (
-		<div className="box expense-row-box" onClick={() => console.log(mate)}>
+		<div className="expense-row-box" onClick={() => console.log(mate)}>
 			<div className="expense-row-header">
 				<div className="expense-row-container">
 					<div>{mate.name}</div>
