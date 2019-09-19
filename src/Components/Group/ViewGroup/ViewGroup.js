@@ -9,7 +9,6 @@ import Mate from "../../Mate/Mate";
 import "./ViewGroup.sass";
 
 const ViewGroup = props => {
-
 	const { group, showArea, categories, addMateToGroup } = props;
 	const [view, setView] = useState("overview");
 	const [expenses, setExpenses] = useState([]);
@@ -38,7 +37,6 @@ const ViewGroup = props => {
 	}
 	totalExpenses = (Math.round(totalExpenses * 100) / 100).toFixed(2);
 
-
 	// calculate what you owe
 	let youHaveSpent = 0;
 	if (expenses) {
@@ -59,18 +57,19 @@ const ViewGroup = props => {
 			if (expense.payments) {
 				expense.payments.forEach(payment => {
 					if (payment.user_id == 7) {
-						if (payment.paid == 'f') {
-							youOwe += +payment.amount;
+						if (payment.user_id != expense.user_id) {
+							if (payment.paid == "f") {
+								youOwe += +payment.amount;
+							}
 						}
 					}
-				})
+				});
 			}
 		});
 	}
 	youOwe = (Math.round(youOwe * 100) / 100).toFixed(2);
 
-
-	// calculate what you owe
+	// calculate what you are owed
 	let youAreOwed = 0;
 	if (expenses) {
 		expenses.forEach(expense => {
@@ -80,17 +79,36 @@ const ViewGroup = props => {
 					// TODO: change 7 to logged in user_id
 					if (expense.user_id == 7) {
 						if (payment.user_id != expense.user_id) {
-							if (payment.paid == 'f') {
+							if (payment.paid == "f") {
 								youAreOwed += +payment.amount;
 							}
 						}
 					}
-				})
+				});
 			}
 		});
 	}
 	youAreOwed = (Math.round(youAreOwed * 100) / 100).toFixed(2);
 
+	// calculate what you were paid back
+	let youWerePaidBack = 0;
+	if (expenses) {
+		expenses.forEach(expense => {
+			if (expense.payments) {
+				expense.payments.forEach(payment => {
+					// TODO: change 7 to logged in user_id
+					if (expense.user_id == 7) {
+						if (payment.user_id != expense.user_id) {
+							if (payment.paid == "t") {
+								youWerePaidBack += +payment.amount;
+							}
+						}
+					}
+				});
+			}
+		});
+	}
+	youWerePaidBack = (Math.round(youWerePaidBack * 100) / 100).toFixed(2);
 
 	let render = null;
 	if (view === "overview") {
@@ -102,6 +120,7 @@ const ViewGroup = props => {
 					<div className="expense-list-total">You have spent: ${youHaveSpent}</div>
 					<div className="expense-list-total">You owe: ${youOwe}</div>
 					<div className="expense-list-total">You are owed: ${youAreOwed}</div>
+					<div className="expense-list-total">You were paid back: ${youWerePaidBack}</div>
 					<div className="expense-list-filter-container">
 						{/* <div className="expense-list-filter-title">m8s</div> */}
 						{/* {props.group.users ? props.group.users.map(mate => <div className="expense-list-filter-mate">{mate.name}</div>) : null} */}

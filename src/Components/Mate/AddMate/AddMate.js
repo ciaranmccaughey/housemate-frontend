@@ -29,17 +29,16 @@ const AddMate = props => {
     }
 	
 	return (
-		<div>
+		<div style={{margin: '5%'}}>
 			<Formik
 				initialValues={{ name: "", email: ""}}
 				onSubmit={(values, { setSubmitting }) => {
                     addMate(values);
 				}}
-				// validationSchema={Yup.object().shape({
-				// 	email: Yup.string()
-				// 		.email()
-				// 		.required("Required")
-				// })}
+				validationSchema={Yup.object().shape({
+					name: Yup.string()
+						.required("Required"),
+				})}
 			>
 				{formikProps => { 
 					const { values, touched, errors, dirty, isSubmitting, handleChange, handleBlur, handleSubmit, handleReset } = formikProps;
@@ -50,8 +49,9 @@ const AddMate = props => {
 									Name
 								</label>
 								<div className="control">
-									<input id="name" placeholder="m8s name" type="text" value={values.name} onChange={handleChange} onBlur={handleBlur} className="input" />
+									<input id="name" placeholder="m8s name" type="text" value={values.name} onChange={handleChange} onBlur={handleBlur} className={'input ' + (errors.name && touched.name ? 'is-danger' : '')} />
 								</div>
+								{errors.name && touched.name ? <p className="help is-danger">Please enter a name.</p> : null}
 							</div>
 
                             <div className="field">
@@ -61,18 +61,11 @@ const AddMate = props => {
 								<div className="control">
 									<input id="email" placeholder="m8s email" type="text" value={values.email} onChange={handleChange} onBlur={handleBlur} className="input" />
 								</div>
+								<p className="help">Enter an email address if you want your m8 invited.</p>
 							</div>
 
-                            <div className="field">
-								<label className="label" htmlFor="email">
-									Invite m8
-								</label>
-								<div className="control">
-									<input id="invite" type="checkbox" value={values.invite} onChange={handleChange} onBlur={handleBlur} className="checkbox" />
-								</div>
-							</div>
 
-							<button type="submit" className="button is-link" 
+							<button type="submit" className="button is-link"  style={{margin: "20px 5%", width: '90%'}}
 							// disabled={isSubmitting}
 							>
 								Add m8

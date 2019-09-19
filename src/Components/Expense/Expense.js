@@ -34,7 +34,7 @@ const Expense = props => {
     }
 
     if (view == VIEW_EXPENSE) {
-        render = <ViewExpense expense={expense} {...props} />;
+        render = <ViewExpense {...props} expense={expense} setView={setView} />;
     }
 
     return (

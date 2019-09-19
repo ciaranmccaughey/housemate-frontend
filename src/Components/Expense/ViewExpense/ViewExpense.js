@@ -6,10 +6,9 @@ import PaymentRow from './PaymentRow';
 import axios from "axios";
 
 const ViewExpense = props => {
-	console.log(props);
 
 	// props
-	const { expenses, expense, setExpenses } = props;
+	const { expenses, expense, setExpenses, setView } = props;
 
 
 	const setPaymentPaid = async (payment, paid) => {
@@ -50,6 +49,28 @@ const ViewExpense = props => {
 	}
 
 
+	const deleteExpense = async () => {
+
+		const postData = {
+				action: 'delete_expense',
+				expense_id: expense.id
+			}
+			
+		// update the database
+		const res = await axios.post("http://housem8.local/api/expense/index.php", postData);
+		const { data, success, message } = res.data;
+
+		console.log(data);
+		
+		if (success) {
+			const updatedExpenses = expenses.filter(exp => exp.id !== expense.id);
+			setExpenses(updatedExpenses);
+			setView('list');
+		}
+
+	}
+
+
 	let payments = null;
 	if (expense.payments) {
 		payments = expense.payments
@@ -77,7 +98,7 @@ const ViewExpense = props => {
                     {payments}
                 </div>
 
-                <button type="button" className="button is-link" style={{ width: "90%", margin: "40px 5%"}}>Delete</button>
+                <button type="button" className="button is-link" style={{ width: "90%", margin: "40px 5%"}} onClick={() => deleteExpense()} >Delete</button>
 				
 			</div>
 
