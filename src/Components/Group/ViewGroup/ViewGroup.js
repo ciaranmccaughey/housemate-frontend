@@ -8,9 +8,9 @@ import axios from "axios";
 import Mate from "../../Mate/Mate";
 import "./ViewGroup.sass";
 
-// import Context from '../../../context';
+const ViewGroup = props => {
 
-const ViewGroup = ({ group, showArea, categories, addMateToGroup }) => {
+	const { group, showArea, categories, addMateToGroup } = props;
 	const [view, setView] = useState("overview");
 	const [expenses, setExpenses] = useState([]);
 
@@ -29,13 +29,22 @@ const ViewGroup = ({ group, showArea, categories, addMateToGroup }) => {
 		}
 	};
 
+	// calculate the total expenses
+	let totalExpenses = 0;
+	if (expenses) {
+		expenses.forEach(expense => {
+			totalExpenses += +expense.amount;
+		});
+	}
+	totalExpenses = (Math.round(totalExpenses * 100) / 100).toFixed(2);
+
 	let render = null;
 	if (view === "overview") {
 		render = (
 			<div>
 				<div className="expense-list-header" style={{ display: "flex" }}>
 					<div className="expense-list-title">My Group</div>
-					<div className="expense-list-total">Total: $200</div>
+					<div className="expense-list-total">Total: ${totalExpenses}</div>
 					<div className="expense-list-filter-container">
 						{/* <div className="expense-list-filter-title">m8s</div> */}
 						{/* {props.group.users ? props.group.users.map(mate => <div className="expense-list-filter-mate">{mate.name}</div>) : null} */}
@@ -46,7 +55,7 @@ const ViewGroup = ({ group, showArea, categories, addMateToGroup }) => {
 	}
 
 	if (view === "expenses") {
-		render = <Expense categories={categories} group={group} expenses={expenses} setExpenses={setExpenses} />;
+		render = <Expense categories={categories} group={group} expenses={expenses} setExpenses={setExpenses} totalExpenses={totalExpenses} />;
 	}
 
 	if (view === "m8s") {

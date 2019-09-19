@@ -77,7 +77,7 @@ const ViewExpense = props => {
                     {payments}
                 </div>
 
-                <button type="button" className="button is-link" style={{ width: "90%", margin: "20px 5%"}}>Delete</button>
+                <button type="button" className="button is-link" style={{ width: "90%", margin: "40px 5%"}}>Delete</button>
 				
 			</div>
 

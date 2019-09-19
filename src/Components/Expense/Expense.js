@@ -12,7 +12,7 @@ const VIEW_EXPENSE = 'view_expense';
 
 const Expense = props => {
     // props
-    const { group, expenses, categories, setExpenses } = props;
+    const { group, expenses, categories, setExpenses, totalExpenses } = props;
     // state
     const [ view, setView ] = useState(LIST);
     const [ expense, setExpense ] = useState(LIST);
@@ -26,11 +26,11 @@ const Expense = props => {
     let render = null;
 
     if (view == LIST) {
-        render = <ExpenseList expenses={expenses} group={group} viewExpense={viewExpense} />;
+        render = <ExpenseList viewExpense={viewExpense} {...props} />;
     }
 
     if (view == ADD) {
-        render = <AddExpense categories={categories} group={group} setView={setView} expenses={expenses} setExpenses={setExpenses} />;
+        render = <AddExpense setView={setView} {...props} />;
     }
 
     if (view == VIEW_EXPENSE) {
