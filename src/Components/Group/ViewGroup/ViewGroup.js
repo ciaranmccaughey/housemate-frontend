@@ -38,6 +38,60 @@ const ViewGroup = props => {
 	}
 	totalExpenses = (Math.round(totalExpenses * 100) / 100).toFixed(2);
 
+
+	// calculate what you owe
+	let youHaveSpent = 0;
+	if (expenses) {
+		expenses.forEach(expense => {
+			// TODO: change user_id below, get from logged in user
+			if (expense.user_id == 7) {
+				youHaveSpent += +expense.amount;
+			}
+		});
+	}
+	youHaveSpent = (Math.round(youHaveSpent * 100) / 100).toFixed(2);
+
+	// calculate what you owe
+	let youOwe = 0;
+	if (expenses) {
+		expenses.forEach(expense => {
+			// TODO: change user_id below, get from logged in user
+			if (expense.payments) {
+				expense.payments.forEach(payment => {
+					if (payment.user_id == 7) {
+						if (payment.paid == 'f') {
+							youOwe += +payment.amount;
+						}
+					}
+				})
+			}
+		});
+	}
+	youOwe = (Math.round(youOwe * 100) / 100).toFixed(2);
+
+
+	// calculate what you owe
+	let youAreOwed = 0;
+	if (expenses) {
+		expenses.forEach(expense => {
+			// TODO: change user_id below, get from logged in user
+			if (expense.payments) {
+				expense.payments.forEach(payment => {
+					// TODO: change 7 to logged in user_id
+					if (expense.user_id == 7) {
+						if (payment.user_id != expense.user_id) {
+							if (payment.paid == 'f') {
+								youAreOwed += +payment.amount;
+							}
+						}
+					}
+				})
+			}
+		});
+	}
+	youAreOwed = (Math.round(youAreOwed * 100) / 100).toFixed(2);
+
+
 	let render = null;
 	if (view === "overview") {
 		render = (
@@ -45,6 +99,9 @@ const ViewGroup = props => {
 				<div className="expense-list-header" style={{ display: "flex" }}>
 					<div className="expense-list-title">My Group</div>
 					<div className="expense-list-total">Total: ${totalExpenses}</div>
+					<div className="expense-list-total">You have spent: ${youHaveSpent}</div>
+					<div className="expense-list-total">You owe: ${youOwe}</div>
+					<div className="expense-list-total">You are owed: ${youAreOwed}</div>
 					<div className="expense-list-filter-container">
 						{/* <div className="expense-list-filter-title">m8s</div> */}
 						{/* {props.group.users ? props.group.users.map(mate => <div className="expense-list-filter-mate">{mate.name}</div>) : null} */}
