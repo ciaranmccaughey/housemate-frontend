@@ -4,7 +4,7 @@ import ExpenseList from './ExenseList/ExpenseList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 import './Expense.sass';
-import ViewExpense from './ViewExpense';
+import ViewExpense from './ViewExpense/ViewExpense';
 
 const LIST = 'list';
 const ADD = 'add';
@@ -21,7 +21,6 @@ const Expense = props => {
     const viewExpense = expense => {
         setView(VIEW_EXPENSE);
         setExpense(expense);
-        console.log(expense)
     }
 
     let render = null;
@@ -35,7 +34,7 @@ const Expense = props => {
     }
 
     if (view == VIEW_EXPENSE) {
-        render = <ViewExpense group={group} setView={setView} expense={expense} />;
+        render = <ViewExpense expense={expense} {...props} />;
     }
 
     return (

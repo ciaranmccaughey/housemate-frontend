@@ -12,7 +12,7 @@ const ExpenseRow = props => {
 				</div>
 			</div>
 			<div className="expense-row-container">
-				<div className="expense-row-amount">£{expense.amount}</div>
+				<div className="expense-row-amount">£{parseFloat(Math.round(expense.amount * 100) / 100).toFixed(2)}</div>
 				<div className="expense-row-users-name">{expense.user.name}</div>
 			</div>
 
