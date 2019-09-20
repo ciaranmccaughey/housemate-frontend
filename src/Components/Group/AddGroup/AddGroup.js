@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from '../../../axios-instance';
 
 const AddGroup = props => {
 
@@ -13,7 +13,7 @@ const AddGroup = props => {
             user_id: 7,
             name: name
         }
-        const res = await axios.post('http://housem8.local/api/group/index.php', postData)
+        const res = await axios.post('group/index.php', postData)
         const { data, success, message } = res.data;
         if (success) {
 			// update groups state

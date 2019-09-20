@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import AddGroup from "../../Components/Group/AddGroup/AddGroup";
 import GroupList from "../../Components/Group/GroupList/GroupList";
-import axios from "axios";
+import axios from "../../axios-instance";
 import ViewGroup from "../../Components/Group/ViewGroup/ViewGroup";
 
 class Group extends Component {
@@ -18,7 +18,8 @@ class Group extends Component {
 	}
 
 	getGroups = async () => {
-		const res = await axios.get("http://housem8.local/api/group/index.php?action=getGroups&user_id=" + 7);
+		const res = await axios.get("group/index.php?action=getGroups&user_id=" + 7);
+
         if (res.data) {
 			const { data, success, message } = res.data;
 			if (success) {
@@ -29,7 +30,7 @@ class Group extends Component {
 	};
 
 	getCategories = async () => {
-		const res = await axios.get("http://housem8.local/api/category/index.php?action=getCategories");
+		const res = await axios.get("category/index.php?action=getCategories");
 
 		if (res.data) {
 			const { data, success, message } = res.data;
@@ -86,7 +87,7 @@ class Group extends Component {
 		}
 
 		if (this.state.showArea == "view") {
-			render = <ViewGroup group={this.state.selectedGroup} showArea={this.showArea} categories={this.state.categories} addMateToGroup={this.addMateToGroup} />;
+			render = <ViewGroup group={this.state.selectedGroup} showArea={this.showArea} categories={this.state.categories} addMateToGroup={this.addMateToGroup} {...this.props}/>;
 		}
 
 		return <>{render}</>;

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons/faChevronLeft";
 import { faCog } from "@fortawesome/free-solid-svg-icons/faCog";
 import Expense from "../../Expense/Expense";
-import axios from "axios";
+import axios from "../../../axios-instance";
 import Mate from "../../Mate/Mate";
 import "./ViewGroup.sass";
 
@@ -18,7 +18,7 @@ const ViewGroup = props => {
 	}, []);
 
 	const getExpenses = async () => {
-		const res = await axios.get("http://housem8.local/api/expense/index.php?action=getExpenses&group_id=" + group.id);
+		const res = await axios.get("expense/index.php?action=getExpenses&group_id=" + group.id);
 
 		if (res.data) {
 			const { data, success, message } = res.data;

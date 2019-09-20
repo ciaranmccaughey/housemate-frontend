@@ -3,7 +3,7 @@ import './ViewExpense.sass';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons/faChevronLeft";
 import PaymentRow from './PaymentRow';
-import axios from "axios";
+import axios from "../../../axios-instance";
 
 const ViewExpense = props => {
 
@@ -21,7 +21,7 @@ const ViewExpense = props => {
 		}
 
 		// update the database
-		const res = await axios.post("http://housem8.local/api/expense/index.php", postData);
+		const res = await axios.post("expense/index.php", postData);
 		const { data, success, message } = res.data;
 
 		if (success) {
@@ -57,7 +57,7 @@ const ViewExpense = props => {
 			}
 			
 		// update the database
-		const res = await axios.post("http://housem8.local/api/expense/index.php", postData);
+		const res = await axios.post("expense/index.php", postData);
 		const { data, success, message } = res.data;
 
 		console.log(data);

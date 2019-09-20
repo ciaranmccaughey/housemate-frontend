@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
+import axios from "../../../axios-instance";
 import ExpenseForm from "./ExpenseForm";
 import AddPayer from "./SelectPayer";
 import Split from "./Split/Split";
@@ -27,7 +27,7 @@ const AddExpense = props => {
 				expense: {...values, user_id: 7}
 			};
 
-			const res = await axios.post("http://housem8.local/api/expense/index.php", postData);
+			const res = await axios.post("expense/index.php", postData);
 			const { data, success, message } = res.data;
 			console.log(data);
 			console.log('sucessss matteeeee');
@@ -65,7 +65,7 @@ const AddExpense = props => {
 			userIds: userIds
 		};
 
-		const res = await axios.post("http://housem8.local/api/expense/index.php", postData);
+		const res = await axios.post("expense/index.php", postData);
 		const { data, success, message } = res.data;
 
 		console.log(data);

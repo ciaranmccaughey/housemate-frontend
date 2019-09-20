@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from 'axios';
+import axios from '../../axios-instance';
 
 class Login extends Component {
 
@@ -33,7 +33,7 @@ class Login extends Component {
             action: 'login'
         }
 
-		const res = await axios.post("http://housem8.local/api/auth/index.php", postData);
+		const res = await axios.post("auth/index.php", postData);
 		const { data, success, message } = res.data;
         
         if (success) {

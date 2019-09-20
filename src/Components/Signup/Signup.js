@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import axios from "../../axios-instance";
 
 class Signup extends Component {
 	state = {
@@ -29,7 +29,7 @@ class Signup extends Component {
 		};
 
 		// make call
-		const res = await axios.post("http://housem8.local/api/auth/index.php", postData);
+		const res = await axios.post("auth/index.php", postData);
 		this.setState({ isLoading: true });
 		const { data, success, message } = res.data;
 		this.setState({ isLoading: false });

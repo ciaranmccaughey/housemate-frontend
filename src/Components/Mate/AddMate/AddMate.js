@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import axios from 'axios';
+import axios from '../../../axios-instance';
 import './AddMate.sass';
 
 
@@ -19,7 +19,7 @@ const AddMate = props => {
             ...values
         }
 
-		const res = await axios.post('http://housem8.local/api/mate/index.php', postData)
+		const res = await axios.post('mate/index.php', postData)
         const { data, success, message } = res.data;
         if (success) {
 
