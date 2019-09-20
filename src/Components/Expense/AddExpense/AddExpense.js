@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { Formik } from "formik";
-import * as Yup from "yup";
 import axios from "../../../axios-instance";
 import ExpenseForm from "./ExpenseForm";
 import AddPayer from "./SelectPayer";
 import Split from "./Split/Split";
+import { useAuth0 } from "../../../react-auth0-wrapper";
 
 const FORM = 'form';
 const ADD_PLAYER = 'addPayer';
 const SPLIT = 'split';
 
 const AddExpense = props => {
+
+	const { user } = useAuth0();
 	
 	const [expense, setExpense] = useState();
 	const [view, setAddExpenseView] = useState(FORM);
@@ -22,9 +23,8 @@ const AddExpense = props => {
 
 			const postData = {
 				action: "add",
-				user_id: 7,
 				group_id: props.group.id,
-				expense: {...values, user_id: 7}
+				expense: {...values, user_id: user.id}
 			};
 
 			const res = await axios.post("expense/index.php", postData);

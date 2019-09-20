@@ -10,7 +10,6 @@ const AddGroup = props => {
 
         const postData = {
             action: 'create',
-            user_id: 7,
             name: name
         }
         const res = await axios.post('group/index.php', postData)

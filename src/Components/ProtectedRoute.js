@@ -1,16 +1,28 @@
-import React, { useContext, Component } from 'react';
+import React, { useEffect, Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Context from '../context';
+import { useAuth0 } from "../react-auth0-wrapper";
+const ProtectedRoute = ({ component: Component, path, ...rest }) => {
+  const { loading, isAuthenticated, loginWithRedirect } = useAuth0();
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
+  useEffect(() => {
+    if (loading || isAuthenticated) {
+      return;
+    }
+    const fn = async () => {
+      await loginWithRedirect({
+        appState: { targetUrl: path }
+      });
+    };
+    fn();
+  }, [loading, isAuthenticated, loginWithRedirect, path]);
 
-    const { state } = useContext(Context);
+  console.log('isAuthenticated', isAuthenticated);
+  
 
-    return (
-        <Route 
-            render={props => !state.isAuth ? <Redirect to="login" /> : <Component {...props} /> }
-            {...rest} />
-    )
+  const render = props => isAuthenticated === true ? <Component {...props} /> : null;
+
+  return <Route path={path} render={render} {...rest} />;
 }
 
 export default ProtectedRoute;

@@ -1,14 +1,23 @@
 import React from "react";
 import "./App.sass";
-
-import Signup from "./Components/Signup/Signup";
 import Group from "./HOC/Group/Group";
-import Nav from "./Components/Nav/Nav";
+import { useAuth0 } from "./react-auth0-wrapper";
 
 function App() {
+
+	const { loading, user, logout } = useAuth0();
+
+	console.log('user', user);
+
+  if (loading) {
+    return (
+      <div>Loading...</div>
+    );
+  }
 	return (
 		<div>
-			<Group />
+		<button onClick={() => logout()}>logout</button>
+			<Group user={user} />
 		</div>
 	);
 }

@@ -14,7 +14,6 @@ const AddMate = props => {
 
         const postData = {
             action: 'add',
-            user_id: 7,
             group_id: group.id,
             ...values
         }

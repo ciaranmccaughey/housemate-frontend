@@ -18,7 +18,7 @@ class Group extends Component {
 	}
 
 	getGroups = async () => {
-		const res = await axios.get("group/index.php?action=getGroups&user_id=" + 7);
+		const res = await axios.get("group/index.php?action=getGroups");
 
         if (res.data) {
 			const { data, success, message } = res.data;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'https://frozen-falls-50114.herokuapp.com/api/';
-// const API_URL = 'http://housem8.local/api/';
+// const API_URL = 'https://frozen-falls-50114.herokuapp.com/api/';
+const API_URL = 'http://housem8.local/api/';
 
 const instance = axios.create({
     baseURL: API_URL,
@@ -13,18 +13,20 @@ const instance = axios.create({
 });
 
 
-// // Add a request interceptor
-// instance.interceptors.request.use(function (config) {
-//     const token = localStorage.getItem('token');
-//     if (token) {
-//       config.headers.token = token;
-//     }
-//     // Do something before request is sent
-//     return config;
-//   }, function (error) {
-//     // Do something with request error
-//     return Promise.reject(error);
-//   });
+// Add a request interceptor
+instance.interceptors.request.use(function (config) {
+    const token = localStorage.getItem('tokenhousem8');
+    if (token) {
+      config.headers.token = token;
+    }
+
+    console.log('called', token);
+    // Do something before request is sent
+    return config;
+  }, function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+  });
 
 // // Add a response interceptor
 // instance.interceptors.response.use(function (response) {

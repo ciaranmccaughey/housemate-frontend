@@ -7,8 +7,13 @@ import Expense from "../../Expense/Expense";
 import axios from "../../../axios-instance";
 import Mate from "../../Mate/Mate";
 import "./ViewGroup.sass";
+import { useAuth0 } from "../../../react-auth0-wrapper";
+
 
 const ViewGroup = props => {
+
+	const { user } = useAuth0();
+
 	const { group, showArea, categories, addMateToGroup } = props;
 	const [view, setView] = useState("overview");
 	const [expenses, setExpenses] = useState([]);
@@ -41,8 +46,7 @@ const ViewGroup = props => {
 	let youHaveSpent = 0;
 	if (expenses) {
 		expenses.forEach(expense => {
-			// TODO: change user_id below, get from logged in user
-			if (expense.user_id == 7) {
+			if (expense.user_id == user.id) {
 				youHaveSpent += +expense.amount;
 			}
 		});
@@ -53,10 +57,9 @@ const ViewGroup = props => {
 	let youOwe = 0;
 	if (expenses) {
 		expenses.forEach(expense => {
-			// TODO: change user_id below, get from logged in user
 			if (expense.payments) {
 				expense.payments.forEach(payment => {
-					if (payment.user_id == 7) {
+					if (payment.user_id == user.id) {
 						if (payment.user_id != expense.user_id) {
 							if (payment.paid == "f") {
 								youOwe += +payment.amount;
@@ -73,11 +76,10 @@ const ViewGroup = props => {
 	let youAreOwed = 0;
 	if (expenses) {
 		expenses.forEach(expense => {
-			// TODO: change user_id below, get from logged in user
 			if (expense.payments) {
 				expense.payments.forEach(payment => {
 					// TODO: change 7 to logged in user_id
-					if (expense.user_id == 7) {
+					if (expense.user_id == user.id) {
 						if (payment.user_id != expense.user_id) {
 							if (payment.paid == "f") {
 								youAreOwed += +payment.amount;
@@ -96,8 +98,7 @@ const ViewGroup = props => {
 		expenses.forEach(expense => {
 			if (expense.payments) {
 				expense.payments.forEach(payment => {
-					// TODO: change 7 to logged in user_id
-					if (expense.user_id == 7) {
+					if (expense.user_id == user.id) {
 						if (payment.user_id != expense.user_id) {
 							if (payment.paid == "t") {
 								youWerePaidBack += +payment.amount;
