@@ -71,7 +71,7 @@ export const AuthWrapper = ({ children }) => {
 
 		const res = await axios.post("auth/index.php", postData);
     const { data, success, message } = res.data;
-		
+
 		if (success) {
 
       const { user, token } = data;
@@ -88,16 +88,14 @@ export const AuthWrapper = ({ children }) => {
   const signupSubmit = async values => {
 		const postData = {
 			...values,
-			action: "login"
+			action: "signup"
 		};
-
-		console.log('signupSubmit', postData);
 
 		const res = await axios.post("auth/index.php", postData);
 		const { data, success, message } = res.data;
 
-		if (success) {
-		}
+    return success;
+
   };
   
   const logout = () => {

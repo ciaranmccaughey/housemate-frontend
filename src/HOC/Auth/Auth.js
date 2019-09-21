@@ -23,7 +23,7 @@ const Auth = () => {
 				</ul>
 			</div>
 
-			{showScreen == "login" ? <Login /> : <Signup setEmail={setEmail} setShowScreen={setShowScreen} />}
+			{showScreen == "login" ? <Login email={email} /> : <Signup setEmail={setEmail} setShowScreen={setShowScreen} />}
 
 		</>
 	);

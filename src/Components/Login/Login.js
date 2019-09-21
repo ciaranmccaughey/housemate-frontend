@@ -11,7 +11,7 @@ const Login = props => {
 	return (
 		<div style={{ margin: "5%" }}>
 			<Formik
-				initialValues={{ email: "", password: "" }}
+				initialValues={{ email: props.email, password: "" }}
 				onSubmit={(values, { setSubmitting }) => {
 					loginSubmit(values);
 				}}

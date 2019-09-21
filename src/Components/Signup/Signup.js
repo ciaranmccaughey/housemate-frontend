@@ -13,10 +13,16 @@ const Signup = props => {
 		<div style={{ margin: "5%" }}>
 			<Formik
 				initialValues={{ name: "", email: "", password: "" }}
-				onSubmit={(values, { setSubmitting }) => {
-					signupSubmit(values);
+				onSubmit={async (values, { setSubmitting }) => {
+					const success = await signupSubmit(values);
+
+					if (success) {
+						setEmail(values.email);
+						setShowScreen('login');
+					}
 				}}
 				validationSchema={Yup.object().shape({
+					name: Yup.string().required("Required"),
 					email: Yup.string().required("Required"),
 					password: Yup.string().required("Required")
 				})}
