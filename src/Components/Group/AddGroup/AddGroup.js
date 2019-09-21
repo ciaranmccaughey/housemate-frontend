@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import axios from '../../../axios-instance';
 import { useAuth } from '../../../auth-wrapper';
+import { Formik } from "formik";
+import * as Yup from "yup";
 
 const AddGroup = props => {
 
+	const { showArea } = props;
+
 	const { user } = useAuth();
-    const [name, setName] = useState("");
     
 
-    const onAddGroup = async () => {
+    const onAddGroup = async values => {
 
         const postData = {
             action: 'create',
-            name: name
+            ...values
         }
         const res = await axios.post('group/index.php', postData)
 		const { data, success, message } = res.data;
@@ -20,27 +23,52 @@ const AddGroup = props => {
         if (success) {
 			// update groups state
 			props.showArea("list");
-			props.addGroup({id: data.id, name: name, users: [user]});
+			props.addGroup({id: data.id, name: values.name, users: [user]});
             // return to main app
         }
     }
 
 	return (
-		<div className="container is-flex" style={{ justifyContent: "center", alignItems: "center", height: "100vh" }}>
-			<div className="">
-				<div className="field">
-					<label className="label">Name</label>
-					<div className="control">
-						<input className="input" type="name" placeholder="Group name" value={name} onChange={(event) => {setName(event.target.value)}} name="name" />
-					</div>
-				</div>
+		<div style={{margin: '5%'}}>
+			<Formik
+				initialValues={{ name: ""}}
+				onSubmit={(values, { setSubmitting }) => {
+                    onAddGroup(values);
+				}}
+				validationSchema={Yup.object().shape({
+					name: Yup.string()
+						.required("Required"),
+				})}
+			>
+				{formikProps => { 
+					const { values, touched, errors, dirty, isSubmitting, handleChange, handleBlur, handleSubmit, handleReset } = formikProps;
+					return (
+						<form onSubmit={handleSubmit}>
+							<div className="field">
+								<label className="label" htmlFor="name">
+									Name
+								</label>
+								<div className="control">
+									<input id="name" placeholder="Group Name" type="text" value={values.name} onChange={handleChange} onBlur={handleBlur} className={'input ' + (errors.name && touched.name ? 'is-danger' : '')} />
+								</div>
+								{errors.name && touched.name ? <p className="help is-danger">Please enter a name.</p> : null}
+							</div>
 
-				<div className="field is-grouped">
-					<div className="control">
-						<button className="button is-link" onClick={onAddGroup}>Add Group</button>
-					</div>
-				</div>
-			</div>
+							<button type="submit" className="button is-link"  style={{margin: "20px 5%", width: '90%'}}
+							// disabled={isSubmitting}
+							>
+								Add Group
+							</button>
+
+							<button type="button" className="button"  style={{margin: "0 5% 5% 5%", width: '90%'}} onClick={() => showArea('list')}
+							// disabled={isSubmitting}
+							>
+								Cancel
+							</button>
+						</form>
+					);
+				}}
+			</Formik>
 		</div>
 	);
 };
