@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from '../../../axios-instance';
+import { useAuth } from '../../../auth-wrapper';
 
 const AddGroup = props => {
 
+	const { user } = useAuth();
     const [name, setName] = useState("");
     
 
@@ -18,7 +20,7 @@ const AddGroup = props => {
         if (success) {
 			// update groups state
 			props.showArea("list");
-			props.addGroup({id: data.id, name: name, users: []});
+			props.addGroup({id: data.id, name: name, users: [user]});
             // return to main app
         }
     }

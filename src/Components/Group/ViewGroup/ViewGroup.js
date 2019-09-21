@@ -7,13 +7,13 @@ import Expense from "../../Expense/Expense";
 import axios from "../../../axios-instance";
 import Mate from "../../Mate/Mate";
 import "./ViewGroup.sass";
-import { useAuth0 } from "../../../react-auth0-wrapper";
+import { useAuth } from "../../../auth-wrapper";
 import GroupSettings from "../../GroupSettings/GroupSettings";
 
 
 const ViewGroup = props => {
 
-	const { user } = useAuth0();
+	const { user } = useAuth();
 
 	const { group, showArea, categories, addMateToGroup } = props;
 	const [view, setView] = useState("overview");

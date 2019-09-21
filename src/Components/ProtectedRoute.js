@@ -3,24 +3,13 @@ import { Route, Redirect } from 'react-router-dom';
 import Login from './Login/Login';
 
 import { useAuth } from '../auth-wrapper';
+import Auth from '../HOC/Auth/Auth';
 
 const ProtectedRoute = ({ component: Component, path, ...rest }) => {
   
-  const { loading, isAuthenticated, loginWithRedirect } = useAuth();
+  const { loading, isAuthenticated } = useAuth();
 
-  useEffect(() => {
-    if (loading || isAuthenticated) {
-      return;
-    }
-    const fn = async () => {
-      await loginWithRedirect({
-        appState: { targetUrl: path }
-      });
-    };
-    fn();
-  }, [loading, isAuthenticated, loginWithRedirect, path]);
-
-  const render = props => isAuthenticated === true ? <Component {...props} /> : <Login />;
+  const render = props => isAuthenticated === true ? <Component {...props} /> : <Auth />;
 
   return <Route path={path} render={render} {...rest} />;
 }

@@ -3,7 +3,7 @@ import axios from "../../../axios-instance";
 import ExpenseForm from "./ExpenseForm";
 import AddPayer from "./SelectPayer";
 import Split from "./Split/Split";
-import { useAuth0 } from "../../../react-auth0-wrapper";
+import { useAuth } from "../../../auth-wrapper";
 
 const FORM = 'form';
 const ADD_PLAYER = 'addPayer';
@@ -11,7 +11,7 @@ const SPLIT = 'split';
 
 const AddExpense = props => {
 
-	const { user } = useAuth0();
+	const { user } = useAuth();
 	
 	const [expense, setExpense] = useState();
 	const [view, setAddExpenseView] = useState(FORM);

@@ -1,83 +1,99 @@
 import React, { Component } from "react";
 import axios from "../../axios-instance";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import { useAuth } from "../../auth-wrapper";
 
-class Signup extends Component {
-	state = {
-		isLoading: false,
-		name: "",
-		email: "",
-		password: ""
-	};
+const Signup = props => {
 
-	constructor(props) {
-		super(props);
-	}
+	const { signupSubmit } = useAuth();
+	const { setEmail, setShowScreen } = props;
 
-	handleChange = event => {
-		const target = event.target;
-		const value = target.value;
-		const name = target.name;
+	return (
+		<div style={{ margin: "5%" }}>
+			<Formik
+				initialValues={{ name: "", email: "", password: "" }}
+				onSubmit={(values, { setSubmitting }) => {
+					signupSubmit(values);
+				}}
+				validationSchema={Yup.object().shape({
+					email: Yup.string().required("Required"),
+					password: Yup.string().required("Required")
+				})}
+			>
+				{formikProps => {
+					const { values, touched, errors, dirty, isSubmitting, handleChange, handleBlur, handleSubmit, handleReset } = formikProps;
+					return (
+						<form onSubmit={handleSubmit}>
+							<div className="field">
+								<label className="label" htmlFor="email">
+									Name
+								</label>
+								<div className="control">
+									<input
+										id="name"
+										placeholder="name"
+										type="text"
+										value={values.name}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										className="input"
+										className={"input " + (errors.name && touched.name ? "is-danger" : "")}
+									/>
+									{errors.name && touched.name ? <p className="help is-danger">Please enter an email.</p> : null}
+								</div>
+							</div>
+							<div className="field">
+								<label className="label" htmlFor="email">
+									Email
+								</label>
+								<div className="control">
+									<input
+										id="email"
+										placeholder="Email"
+										type="text"
+										value={values.email}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										className="input"
+										className={"input " + (errors.password && touched.password ? "is-danger" : "")}
+									/>
+									{errors.email && touched.email ? <p className="help is-danger">Please enter an email.</p> : null}
+								</div>
+							</div>
 
-		this.setState({ [name]: value });
-	};
+							<div className="field">
+								<label className="label" htmlFor="name">
+									Password
+								</label>
+								<div className="control">
+									<input
+										id="password"
+										placeholder="Password"
+										type="password"
+										value={values.password}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										className={"input " + (errors.password && touched.password ? "is-danger" : "")}
+									/>
+								</div>
+								{errors.password && touched.password ? <p className="help is-danger">Please enter a password.</p> : null}
+							</div>
 
-	onSubmit = async () => {
-		// set post data
-		const postData = {
-			...this.state,
-			action: "signup"
-		};
-
-		// make call
-		const res = await axios.post("auth/index.php", postData);
-		this.setState({ isLoading: true });
-		const { data, success, message } = res.data;
-		this.setState({ isLoading: false });
-
-		if (success) {
-			// route to login
-			this.props.setEmail(this.state.email);
-			this.props.setShowScreen('login');
-        }
-
-	};
-
-	render() {
-		return (
-			<div className="container is-flex" style={{justifyContent: 'center', alignItems: 'center'}}>
-				<div className="box"  style={{ minWidth: "80%"}}>
-					<label className="label">Name</label>
-					<div className="field">
-						<div className="control">
-							<input className="input" type="text" placeholder="Firstname" value={this.state.name} onChange={this.handleChange} name="name" />
-						</div>
-					</div>
-
-					<div className="field">
-						<label className="label">Email</label>
-						<div className="control">
-							<input className="input" type="email" placeholder="email" value={this.state.email} onChange={this.handleChange} name="email" />
-						</div>
-					</div>
-
-					<div className="field">
-						<label className="label">Password</label>
-						<div className="control">
-							<input className="input" type="password" placeholder="password" value={this.state.password} onChange={this.handleChange} name="password" />
-						</div>
-					</div>
-
-					<div className="field is-grouped">
-						<div className="control">
-							<button className="button is-link" onClick={this.onSubmit} disabled={this.state.isLoading}>
+							<button
+								type="submit"
+								className="button is-link"
+								style={{ margin: "20px 5%", width: "90%" }}
+								// disabled={isSubmitting}
+							>
 								Signup
 							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
-}
+						</form>
+					);
+				}}
+			</Formik>
+		</div>
+	);
+};
 
 export default Signup;

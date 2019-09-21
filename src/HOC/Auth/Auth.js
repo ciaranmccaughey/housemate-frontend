@@ -23,7 +23,7 @@ const Auth = () => {
 				</ul>
 			</div>
 
-			{showScreen == "login" ? <Login email={email} setIsAuth={(payload) => dispatch({ type: "LOGIN_USER", payload: payload })} /> : <Signup setEmail={setEmail} setShowScreen={setShowScreen} />}
+			{showScreen == "login" ? <Login /> : <Signup setEmail={setEmail} setShowScreen={setShowScreen} />}
 
 		</>
 	);

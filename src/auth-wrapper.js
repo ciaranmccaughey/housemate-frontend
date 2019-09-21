@@ -18,7 +18,7 @@ export const AuthWrapper = ({ children }) => {
     const initAuth = async () => {
 
       const token = localStorage.getItem('tokenhousem8');
-
+      
       if (token) {
 
         const user = await getUserFromToken();
@@ -62,6 +62,49 @@ export const AuthWrapper = ({ children }) => {
     return data;
   }
 
+  const loginSubmit = async values => {
+    
+    const postData = {
+			...values,
+			action: "login"
+		};
+
+		const res = await axios.post("auth/index.php", postData);
+    const { data, success, message } = res.data;
+		
+		if (success) {
+
+      const { user, token } = data;
+      localStorage.setItem('tokenhousem8', token);
+
+      setUser(user);
+      setIsAuthenticated(true);
+      setLoading(false);
+
+		}
+  };
+  
+
+  const signupSubmit = async values => {
+		const postData = {
+			...values,
+			action: "login"
+		};
+
+		console.log('signupSubmit', postData);
+
+		const res = await axios.post("auth/index.php", postData);
+		const { data, success, message } = res.data;
+
+		if (success) {
+		}
+  };
+  
+  const logout = () => {
+    localStorage.setItem('tokenhousem8', '');
+    setIsAuthenticated(false);
+
+  }
 
 
   return (
@@ -70,7 +113,9 @@ export const AuthWrapper = ({ children }) => {
         isAuthenticated,
         user,
         loading,
-        setUser
+        logout,
+        loginSubmit,
+        signupSubmit
       }}
     >
       {children}

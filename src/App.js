@@ -15,8 +15,6 @@ function App() {
 	// }
 	return (
 		<div>
-			<button onClick={() => logout()}>logout</button>
-
 		{!user.name ? <AddName setUser={setUser} user={user}/> : <Group user={user} />}
 		</div>
 	);
