@@ -13,7 +13,8 @@ const AddGroup = props => {
             name: name
         }
         const res = await axios.post('group/index.php', postData)
-        const { data, success, message } = res.data;
+		const { data, success, message } = res.data;
+		
         if (success) {
 			// update groups state
 			props.showArea("list");

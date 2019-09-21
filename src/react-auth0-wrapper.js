@@ -20,6 +20,22 @@ export const Auth0Provider = ({
 
   useEffect(() => {
     const initAuth0 = async () => {
+
+      const token = localStorage.getItem('tokenhousem8');
+
+      if (token) {
+
+        const user = await getUserFromToken();
+
+        if (user) {
+          setUser(user);
+          setIsAuthenticated(true);
+          setLoading(false);
+          return;
+        }
+      }
+
+
       const auth0FromHook = await createAuth0Client(initOptions);
       setAuth0(auth0FromHook);
 
@@ -47,13 +63,23 @@ export const Auth0Provider = ({
   }, []);
 
 
-  const createOrGetUserAndToken = async (user) => {
+  const createOrGetUserAndToken = async user => {
+    
     const res = await axios.post('auth/index.php', {action: 'login', email: user.email});
     const { data } = res.data;
-    console.log(data);
+
 
     return data;
   }
+
+  const getUserFromToken = async () => {
+    
+    const res = await axios.post('auth/index.php', {action: 'get_user'});
+    const { data } = res.data;
+
+    return data;
+  }
+
 
   const loginWithPopup = async (params = {}) => {
     setPopupOpen(true);
