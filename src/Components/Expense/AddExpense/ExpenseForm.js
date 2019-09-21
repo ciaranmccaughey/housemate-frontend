@@ -45,7 +45,7 @@ const ExpenseForm = props => {
 									Amount ($)
 								</label>
 								<div className="control">
-									<input id="amount" placeholder="Enter your Amount" type="text" value={values.amount} onChange={handleChange} onBlur={handleBlur} className={'input ' + (errors.amount && touched.amount ? 'is-danger' : '')} />
+									<input id="amount" placeholder="Enter your Amount" type="number" value={values.amount} onChange={handleChange} onBlur={handleBlur} className={'input ' + (errors.amount && touched.amount ? 'is-danger' : '')} />
 								</div>
 								{errors.amount && touched.amount ? <p className="help is-danger">Please enter an amount.</p> : null}
 							</div>

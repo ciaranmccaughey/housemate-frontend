@@ -1,5 +1,7 @@
 import React from "react";
 import GroupRow from "./GroupRow/GroupRow";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 
 const GroupList = props => {
 	return (
@@ -19,7 +21,7 @@ const GroupList = props => {
 
 			<div>
 				<button className="button is-link floating-button" onClick={() => props.showArea("add")}>
-					Add Group
+					<FontAwesomeIcon icon={faPlus} />
 				</button>
 			</div>
 		</div>
