@@ -8,6 +8,7 @@ import axios from "../../../axios-instance";
 import Mate from "../../Mate/Mate";
 import "./ViewGroup.sass";
 import { useAuth0 } from "../../../react-auth0-wrapper";
+import GroupSettings from "../../GroupSettings/GroupSettings";
 
 
 const ViewGroup = props => {
@@ -139,6 +140,9 @@ const ViewGroup = props => {
 		render = <Mate group={group} addMateToGroup={addMateToGroup} />;
 	}
 
+	if (view === "settings") {
+		render = <GroupSettings group={group} />;
+	}
 	return (
 		<div>
 			{false ? (

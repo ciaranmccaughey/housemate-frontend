@@ -6,9 +6,9 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 const GroupList = props => {
 	return (
 		<div style={{ display: "flex", flexDirection: "column"}}>
-			<div className="list-container">
+			<div className="list-container" onClick={() => console.log('clicked')}>
 				<div className="expense-list-header" style={{ display: "flex" }}>
-					<div className="expense-list-title">Your Groups</div>
+					<div className="expense-list-title" >Your Groups</div>
 				</div>
 				{props.groups.length ? (
 					<>
