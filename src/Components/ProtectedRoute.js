@@ -1,9 +1,12 @@
 import React, { useEffect, Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import Context from '../context';
-import { useAuth0 } from "../react-auth0-wrapper";
+import Login from './Login/Login';
+
+import { useAuth } from '../auth-wrapper';
+
 const ProtectedRoute = ({ component: Component, path, ...rest }) => {
-  const { loading, isAuthenticated, loginWithRedirect } = useAuth0();
+  
+  const { loading, isAuthenticated, loginWithRedirect } = useAuth();
 
   useEffect(() => {
     if (loading || isAuthenticated) {
@@ -17,10 +20,7 @@ const ProtectedRoute = ({ component: Component, path, ...rest }) => {
     fn();
   }, [loading, isAuthenticated, loginWithRedirect, path]);
 
-  console.log('isAuthenticated', isAuthenticated);
-  
-
-  const render = props => isAuthenticated === true ? <Component {...props} /> : null;
+  const render = props => isAuthenticated === true ? <Component {...props} /> : <Login />;
 
   return <Route path={path} render={render} {...rest} />;
 }

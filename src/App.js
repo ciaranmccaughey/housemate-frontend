@@ -1,22 +1,23 @@
 import React from "react";
 import "./App.sass";
 import Group from "./HOC/Group/Group";
-import { useAuth0 } from "./react-auth0-wrapper";
+import { useAuth } from './auth-wrapper';
+
 import AddName from "./Components/AddName/AddName";
 
 function App() {
-	const { loading, user, logout, setUser } = useAuth0();
+	const { loading, user, logout, setUser } = useAuth();
 
-	console.log("user", user);
+	// console.log("user", user);
 
-	if (loading) {
-		return <div>Loading...</div>;
-	}
+	// if (loading) {
+	// 	return <div>Loading...</div>;
+	// }
 	return (
 		<div>
 			<button onClick={() => logout()}>logout</button>
 
-			{!user.name ? <AddName setUser={setUser} user={user}/> : <Group user={user} />}
+		{!user.name ? <AddName setUser={setUser} user={user}/> : <Group user={user} />}
 		</div>
 	);
 }

@@ -1,24 +1,14 @@
 import React, { Component } from "react";
 import axios from '../../axios-instance';
+import { Formik } from "formik";
+import * as Yup from "yup";
+import { useAuth } from '../../auth-wrapper';
 
-class Login extends Component {
 
-	state = {
-		email: "",
-		password: ""
-    };
-    
-    constructor(props) {
-        super(props);
-        this.state.email = this.props.email;
-    }
 
-    componentDidMount(){
-        const value = this.context;
+const Login = props => {
 
-      }
-
-	handleChange = event => {
+	const handleChange = event => {
         const target = event.target;
 		const value = target.value;
 		const name = target.name;
@@ -26,7 +16,7 @@ class Login extends Component {
 		this.setState({ [name]: value });
     };
 
-    loginSubmit = async () => {
+    const loginSubmit = async () => {
 
         const postData =  {
             ...this.state,
@@ -44,35 +34,55 @@ class Login extends Component {
         
     }
 
-	render() {
 		return (
-			<div className="container is-flex" style={{ justifyContent: "center", alignItems: "center" }}>
-				<div className="box" style={{ minWidth: "80%"}}>
-					<div className="field">
-						<label className="label">Email</label>
-						<div className="control">
-							<input className="input" type="email" placeholder="email" value={this.state.email} onChange={this.handleChange} name="email" id="email" />
-						</div>
-					</div>
+			<div style={{margin: '5%'}}>
+			<Formik
+				initialValues={{ email: "", password: ""}}
+				onSubmit={(values, { setSubmitting }) => {
+				}}
+				validationSchema={Yup.object().shape({
+					email: Yup.string()
+						.required("Required"),
+					password: Yup.string()
+						.required("Required"),
+				})}
+			>
+				{formikProps => { 
+					const { values, touched, errors, dirty, isSubmitting, handleChange, handleBlur, handleSubmit, handleReset } = formikProps;
+					return (
+						<form onSubmit={handleSubmit}>
+						
+                            <div className="field">
+								<label className="label" htmlFor="email">
+									Email
+								</label>
+								<div className="control">
+									<input id="email" placeholder="Email" type="text" value={values.email} onChange={handleChange} onBlur={handleBlur} className="input"  className={'input ' + (errors.password && touched.password ? 'is-danger' : '')}/>
+									{errors.email && touched.email ? <p className="help is-danger">Please enter an email.</p> : null}
+								</div>
+							</div>
 
-					<div className="field">
-						<label className="label">Password</label>
-						<div className="control">
-							<input className="input" type="password" placeholder="password" value={this.state.password} onChange={this.handleChange} name="password" />
-						</div>
-					</div>
+							<div className="field">
+								<label className="label" htmlFor="name">
+									Password
+								</label>
+								<div className="control">
+									<input id="password" placeholder="Password" type="password" value={values.password} onChange={handleChange} onBlur={handleBlur} className={'input ' + (errors.password && touched.password ? 'is-danger' : '')} />
+								</div>
+								{errors.password && touched.password ? <p className="help is-danger">Please enter a password.</p> : null}
+							</div>
 
-                    <div className="field is-grouped">
-						<div className="control">
-							<button id="login-button" className="button is-link" onClick={this.loginSubmit} disabled={this.state.isLoading}>
+							<button type="submit" className="button is-link"  style={{margin: "20px 5%", width: '90%'}}
+							// disabled={isSubmitting}
+							>
 								Login
 							</button>
-						</div>
-					</div>
-				</div>
-			</div>
+						</form>
+					);
+				}}
+			</Formik>
+		</div>
 		);
-	}
 }
 
 export default Login;

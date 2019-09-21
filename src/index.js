@@ -6,33 +6,21 @@ import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import Context from "./context";
-import Splash from "./Routes/Splash";
 import reducer from "./reducer";
 
-import createAuth0Client from "@auth0/auth0-spa-js";
-import { Auth0Provider } from "./react-auth0-wrapper";
-import config from "./auth_config.json";
-
-// A function that routes the user to the right place
-// after login
-
+import { AuthWrapper } from './auth-wrapper';
 
 const Root = () => {
 	const initialState = useContext(Context);
 	const [state, dispatch] = useReducer(reducer, initialState);
 
-	const onRedirectCallback = appState => {
-		window.history.replaceState({}, document.title, appState && appState.targetUrl ? appState.targetUrl : window.location.pathname);
-	
-	};
-
 	return (
 		<BrowserRouter>
-			<Auth0Provider domain={config.domain} client_id={config.clientId} redirect_uri={window.location.origin} onRedirectCallback={onRedirectCallback}>
+			<AuthWrapper >
 				<Switch>
 					<ProtectedRoute path="/" component={App} exact />
 				</Switch>
-			</Auth0Provider>
+			</AuthWrapper>
 		</BrowserRouter>
 	);
 };
