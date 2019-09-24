@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "../../axios-instance";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -7,14 +7,26 @@ import { useAuth } from "../../auth-wrapper";
 const Signup = props => {
 
 	const { signupSubmit } = useAuth();
+
+	const [ groupPin, setGroupPin ] = useState();
 	const { setEmail, setShowScreen } = props;
+
+
+	useEffect(() => {
+		let search = window.location.search;
+		let params = new URLSearchParams(search);
+		let group_pin = params.get('group');
+		setGroupPin(group_pin);
+
+	}, []);
 
 	return (
 		<div style={{ margin: "5%" }}>
 			<Formik
 				initialValues={{ name: "", email: "", password: "" }}
 				onSubmit={async (values, { setSubmitting }) => {
-					const success = await signupSubmit(values);
+					
+					const success = await signupSubmit({...values, 'group_pin': groupPin});
 
 					if (success) {
 						setEmail(values.email);
