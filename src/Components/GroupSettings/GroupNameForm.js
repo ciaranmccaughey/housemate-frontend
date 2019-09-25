@@ -8,22 +8,20 @@ const GroupNameForm = props => {
     const { group } = props;
 
 
-    const addMate = async values => {
+    const updateGroupName = async values => {
 
-        // const postData = {
-        //     action: 'add',
-        //     group_id: group.id,
-        //     ...values
-        // }
+        const postData = {
+            action: 'update_name',
+            group_id: group.id,
+            ...values
+        }
 
-		// const res = await axios.post('mate/index.php', postData)
-		// const { data, success, message } = res.data;
+		const res = await axios.post('group/index.php', postData)
+		const { data, success, message } = res.data;
 		
-        // if (success) {
-
-		// 	addMateToGroup(data);
-		// 	setView('list');
-        // }
+        if (success) {
+			// update the group name
+        }
     }
 	
 	return (
@@ -31,7 +29,7 @@ const GroupNameForm = props => {
 			<Formik
 				initialValues={{ name: group.name, email: ""}}
 				onSubmit={(values, { setSubmitting }) => {
-                    // addMate(values);
+                    updateGroupName(values);
 				}}
 				validationSchema={Yup.object().shape({
 					name: Yup.string()
