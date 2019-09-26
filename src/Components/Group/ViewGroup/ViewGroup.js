@@ -117,8 +117,7 @@ const ViewGroup = props => {
 		render = (
 			<div>
 				<div className="expense-list-header" style={{ display: "flex" }}>
-					<div className="expense-list-title">My Group</div>
-					<div className="expense-list-total">Total: ${totalExpenses}</div>
+					<div className="expense-list-total" style={{marginTop: "70px"}}>Total: ${totalExpenses}</div>
 					<div className="expense-list-total">You have spent: ${youHaveSpent}</div>
 					<div className="expense-list-total">You owe: ${youOwe}</div>
 					<div className="expense-list-total">You are owed: ${youAreOwed}</div>
@@ -141,11 +140,11 @@ const ViewGroup = props => {
 	}
 
 	if (view === "settings") {
-		render = <GroupSettings group={group} />;
+		render = <GroupSettings group={group} {...props}/>;
 	}
 	return (
 		<div>
-			{false ? (
+			{true ? (
 				<div className="header-container">
 					<div className="back-icon">
 						<FontAwesomeIcon icon={faChevronLeft} onClick={() => showArea("list")} />

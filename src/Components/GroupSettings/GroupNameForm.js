@@ -5,7 +5,7 @@ import axios from '../../axios-instance';
 
 const GroupNameForm = props => {
 
-    const { group } = props;
+    const { group, onGroupNameChange } = props;
 
 
     const updateGroupName = async values => {
@@ -21,6 +21,8 @@ const GroupNameForm = props => {
 		
         if (success) {
 			// update the group name
+			const updateGroup = {...group, name: values.name};
+			onGroupNameChange(updateGroup);
         }
     }
 	

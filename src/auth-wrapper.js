@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from './axios-instance';
+import Modal from "./Components/Modal/Modal";
 
 
 export const AuthContext = React.createContext();
@@ -11,6 +12,12 @@ export const AuthWrapper = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState();
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
+
+  // modal
+  const [modalState, setModalState] = useState(false);
+  const [modalTitle, setModalTitle] = useState('');
+  const [modalMessage, setModalMessage] = useState('');
+  const [modelProceed, setModalProceed] = useState();
 
 
   
@@ -104,6 +111,13 @@ export const AuthWrapper = ({ children }) => {
 
   }
 
+  const showModal = (title, message, proceed) => {
+    setModalState(true);
+    setModalTitle(title);
+    setModalMessage(message);
+    setModalProceed(proceed);
+  }
+
 
   return (
     <AuthContext.Provider
@@ -113,10 +127,19 @@ export const AuthWrapper = ({ children }) => {
         loading,
         logout,
         loginSubmit,
-        signupSubmit
+        signupSubmit,
+        showModal
       }}
     >
       {children}
+      <Modal 
+            closeModal={() => setModalState(false)} 
+            modalState={modalState} 
+            proceed={modelProceed}
+            title={modalTitle}
+          >
+          {modalMessage}
+          </Modal>
     </AuthContext.Provider>
   );
 };

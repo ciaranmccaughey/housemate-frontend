@@ -69,6 +69,29 @@ class Group extends Component {
 		this.setState({ showArea: "view", selectedGroup });
 	};
 
+	// delete the group from the group settings component
+	onDeleteGroup = groupDeleted => {
+		const updateGroups =  this.state.groups.filter(group => group.id != groupDeleted.id);
+		this.setState({ showArea: "list", selectedGroup: null, groups: updateGroups });
+	}
+
+	// leave the group from the group settings component
+	onLeaveGroup = groupLeft => {
+		const updateGroups =  this.state.groups.filter(group => group.id != groupLeft.id);
+		this.setState({ showArea: "list", selectedGroup: null, groups: updateGroups });
+	}
+
+	// update groups name from the group settings component
+	onGroupNameChange = groupChanged => {
+		const updateGroups =  this.state.groups.map((group) => {
+			if (group.id === groupChanged.id) {
+				group.name = groupChanged.name;
+			}
+			return group;
+		});
+		this.setState({ selectedGroup: groupChanged, groups: updateGroups });
+	}
+
 	addGroup = group => {
 		let groups = null;
 		if (this.state.groups.length) {
@@ -87,7 +110,7 @@ class Group extends Component {
 		}
 
 		if (this.state.showArea == "view") {
-			render = <ViewGroup group={this.state.selectedGroup} showArea={this.showArea} categories={this.state.categories} addMateToGroup={this.addMateToGroup} {...this.props}/>;
+			render = <ViewGroup group={this.state.selectedGroup} showArea={this.showArea} categories={this.state.categories} addMateToGroup={this.addMateToGroup} onDeleteGroup={this.onDeleteGroup} onLeaveGroup={this.onLeaveGroup} onGroupNameChange={this.onGroupNameChange} {...this.props}/>;
 		}
 
 		return <>{render}</>;
