@@ -50,15 +50,24 @@ const GroupSettings = props => {
 	
 	return (
 		<div style={{ display: "flex", flexDirection: "column" }}>
-			Settings
-            <GroupNameForm group={group} onGroupNameChange={onGroupNameChange} />
+			<div className="expense-list-header" style={{display: 'flex'}}>
+				<div className="expense-list-title">Settings</div>
+				<div className="expense-list-total">Change the group settings here.</div>
 
-            <button type="submit" className="button is-link" style={{ margin: "10px 5%", width: "90%" }} onClick={() => showModal('Leave Group', 'Are you sure you want to leave this group?', () => leaveGroup)}>
-				Leave Group
-			</button>
-            {group.created_by_user_id === user.id ? <button type="submit" className="button is-link" style={{ margin: "10px 5%", width: "90%" }} onClick={() => showModal('Delete Group', 'Are you sure you want to delete this group?', () => deleteGroup)}>
-				Delete Group
-			</button> : null}
+			</div>
+
+			<div style={{marginTop: "200px"}}>
+				<button type="submit" className="button is-warning" style={{ margin: "10px 5%", width: "90%" }} onClick={() => showModal('Leave Group', 'Are you sure you want to leave this group?', () => leaveGroup)}>
+					Leave Group
+				</button>
+				{group.created_by_user_id === user.id ? <button type="submit" className="button is-danger" style={{ margin: "10px 5%", width: "90%" }} onClick={() => showModal('Delete Group', 'Are you sure you want to delete this group?', () => deleteGroup)}>
+					Delete Group
+				</button> : null}
+
+				<GroupNameForm group={group} onGroupNameChange={onGroupNameChange} />
+			</div>
+           
+
 		</div>
 	);
 };

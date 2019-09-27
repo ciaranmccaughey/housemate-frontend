@@ -52,7 +52,7 @@ const GroupNameForm = props => {
 								{errors.name && touched.name ? <p className="help is-danger">Please enter a name.</p> : null}
 							</div>
 
-							<button type="submit" className="button is-link"  style={{margin: "20px 5%", width: '90%'}}
+							<button type="submit" className="button is-link"  style={{margin: "5px 5%", width: '90%'}}
 							// disabled={isSubmitting}
 							>
 								Update

@@ -3,16 +3,7 @@ import Group from "../../../HOC/Group/Group";
 import "./GroupView.sass";
 
 const GroupOverview = props => {
-	const { expenses, user, group } = props;
-
-	// calculate the total expenses
-	let totalExpenses = 0;
-	if (expenses) {
-		expenses.forEach(expense => {
-			totalExpenses += +expense.amount;
-		});
-	}
-	totalExpenses = (Math.round(totalExpenses * 100) / 100).toFixed(2);
+	const { expenses, user, group, totalExpenses } = props;
 
 	// calculate what you owe
 	let youHaveSpent = 0;
@@ -91,60 +82,61 @@ const GroupOverview = props => {
 					<div>Total</div>
 					<div>${totalExpenses}</div>
 				</div>
+				<div>
+					<div className="group-view-container">
+						<div className="group-view-row-box">
+							<div className="group-box-title">You have spent</div>
+							<div className="group-box-content-container">
+								<div className="group-box-text">This is the total of what you have spent while in this group.</div>
+								<div className="group-box-amount">
+									<span style={{ fontSize: "10px" }}>£</span>
+									{youHaveSpent}
+								</div>
+							</div>
+						</div>
+						<div className="group-view-row-box">
+							<div className="group-box-title">You owe</div>
+							<div className="group-box-content-container">
+								<div className="group-box-text">This is the total of what you have spent while in this group.</div>
+								<div className="group-box-amount">
+									<span style={{ fontSize: "10px" }}>£</span>
+									{youOwe}
+								</div>
+							</div>
+						</div>
+						<div className="group-view-row-box">
+							<div className="group-box-title">You are owed</div>
+							<div className="group-box-content-container">
+								<div className="group-box-text">This is the total of what you have spent while in this group.</div>
+								<div className="group-box-amount">
+									<span style={{ fontSize: "10px" }}>£</span>
+									{youAreOwed}
+								</div>
+							</div>
+						</div>
 
-				<div className="group-view-container">
-					<div className="group-view-row-box">
-						<div className="group-box-title">You have spent</div>
-						<div className="group-box-content-container">
-							<div className="group-box-text">This is the total of what you have spent while in this group.</div>
-							<div className="group-box-amount">
-								<span style={{ fontSize: "10px" }}>£</span>
-								{youHaveSpent}
+						<div className="group-view-row-box">
+							<div className="group-box-title">You were paid back</div>
+							<div className="group-box-content-container">
+								<div className="group-box-text">This is the total of what you have spent while in this group.</div>
+								<div className="group-box-amount">
+									<span style={{ fontSize: "10px" }}>£</span>
+									{youWerePaidBack}
+								</div>
 							</div>
 						</div>
 					</div>
-					<div className="group-view-row-box">
-						<div className="group-box-title">You owe</div>
-						<div className="group-box-content-container">
-							<div className="group-box-text">This is the total of what you have spent while in this group.</div>
-							<div className="group-box-amount">
-								<span style={{ fontSize: "10px" }}>£</span>
-								{youOwe}
+					<div className="recent-tasks-box">
+						<div className="recent-tasks-title">Recent Tasks Added</div>
+						<div className="recent-tasks-content-container">
+							<div className="recent-tasks-content">
+								<label className="myCheckbox">
+									<input type="checkbox"></input>
+									<span></span>
+								</label>
 							</div>
+							<div className="recent-tasks-content">Empty the bins</div>
 						</div>
-					</div>
-					<div className="group-view-row-box">
-						<div className="group-box-title">You are owed</div>
-						<div className="group-box-content-container">
-							<div className="group-box-text">This is the total of what you have spent while in this group.</div>
-							<div className="group-box-amount">
-								<span style={{ fontSize: "10px" }}>£</span>
-								{youAreOwed}
-							</div>
-						</div>
-					</div>
-
-					<div className="group-view-row-box">
-						<div className="group-box-title">You were paid back</div>
-						<div className="group-box-content-container">
-							<div className="group-box-text">This is the total of what you have spent while in this group.</div>
-							<div className="group-box-amount">
-								<span style={{ fontSize: "10px" }}>£</span>
-								{youWerePaidBack}
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="recent-tasks-box">
-					<div className="recent-tasks-title">Recent Tasks Added</div>
-					<div className="recent-tasks-content-container">
-						<div className="recent-tasks-content">
-							<label className="myCheckbox">
-								<input type="checkbox"></input>
-								<span></span>
-							</label>
-						</div>
-						<div className="recent-tasks-content">Empty the bins</div>
 					</div>
 				</div>
 			</div>

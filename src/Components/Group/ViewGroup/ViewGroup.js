@@ -35,15 +35,24 @@ const ViewGroup = props => {
 		}
 	};
 
+	// calculate the total expenses
+	let totalExpenses = 0;
+	if (expenses) {
+		expenses.forEach(expense => {
+			totalExpenses += +expense.amount;
+		});
+	}
+	totalExpenses = (Math.round(totalExpenses * 100) / 100).toFixed(2);
+
 	
 
 	let render = null;
 	if (view === "overview") {
-		render = <GroupOverview expenses={expenses} user={user} group={group} />
+		render = <GroupOverview expenses={expenses} user={user} group={group} totalExpenses={totalExpenses} />
 	}
 
 	if (view === "expenses") {
-		render = <Expense categories={categories} group={group} expenses={expenses} setExpenses={setExpenses} totalExpenses={200} />;
+		render = <Expense categories={categories} group={group} expenses={expenses} setExpenses={setExpenses} totalExpenses={totalExpenses} />;
 	}
 
 	if (view === "m8s") {

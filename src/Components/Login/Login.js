@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import axios from "../../axios-instance";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../../auth-wrapper";
@@ -7,13 +6,18 @@ import { useAuth } from "../../auth-wrapper";
 const Login = props => {
 
 	const { loginSubmit } = useAuth();
+	const [usernameOrPass, setUsernameOrPass] = useState(false);
 
 	return (
 		<div style={{ margin: "5%" }}>
 			<Formik
 				initialValues={{ email: props.email, password: "" }}
-				onSubmit={(values, { setSubmitting }) => {
-					loginSubmit(values);
+				onSubmit={ async (values, { setSubmitting }) => {
+					const success = await loginSubmit(values);
+
+					if (!success) {
+						setUsernameOrPass(true);
+					}
 				}}
 				validationSchema={Yup.object().shape({
 					email: Yup.string().required("Required"),
@@ -60,6 +64,7 @@ const Login = props => {
 								</div>
 								{errors.password && touched.password ? <p className="help is-danger">Please enter a password.</p> : null}
 							</div>
+							{usernameOrPass ? <p className="help is-danger">Username or password is incorrect.</p> : null}
 
 							<button
 								type="submit"

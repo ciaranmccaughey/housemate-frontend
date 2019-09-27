@@ -87,7 +87,8 @@ export const AuthWrapper = ({ children }) => {
       setIsAuthenticated(true);
       setLoading(false);
 
-		}
+    }
+    return success;
   };
   
 

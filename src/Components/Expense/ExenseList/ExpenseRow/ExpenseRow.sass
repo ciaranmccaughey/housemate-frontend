@@ -1,23 +1,27 @@
 @import "../../../../App.sass"
+.expense-row-list-container
+    display: flex
+    flex-direction: column
+    margin: auto
+    justify-content: center
+    align-items: center
 
 .expense-row-box
     background-color: white;
-    // border-radius: 6px;
-    // box-shadow: 0 3px 4px rgba(10, 10, 10, 0.2), 0 0 0 1px rgba(10, 10, 10, 0.1);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.25), 0 3px 6px rgba(0,0,0,0.1)
     color: #757763;
     display: block;
     padding: 1.45rem;
     margin: 0 5px
     border-bottom: 1px solid #cccccc
+    width: 93%
 
 .expense-row-box:last-child
-    // box-shadow: 0 2px 3px rgba(10, 10, 10, 0.5), 0 0 0 1px rgba(10, 10, 10, .1);
-    border-radius:  0 0 20px 20px
+    border-radius:  0 0 15px 15px
 
-.expense-row-box:nth-child(2)
-    // box-shadow: 0 2px 3px rgba(10, 10, 10, 0.5), 0 0 0 1px rgba(10, 10, 10, .1);
+.expense-row-box:first-child
     margin-top: 100px
-    border-radius: 10px 10px 0 0
+    border-radius: 15px 15px 0 0
 
 .expense-row-container
     display: flex
@@ -29,7 +33,6 @@
     justify-content: space-between
 
 .expense-row-users-name
-    // font-weight: bold
     color: $primary
     font-size: 20px
     line-height: 1.8

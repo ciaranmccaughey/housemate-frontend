@@ -12,12 +12,12 @@ const ExpenseList = props => {
                 <div className="expense-list-header" style={{display: 'flex'}}>
                     <div className="expense-list-title">Expenses</div>
                     <div className="expense-list-total">Total: ${totalExpenses}</div>
-                    <div className="expense-list-filter-container">
-                        {/* <div className="expense-list-filter-title">m8s</div> */}
-                        {/* {props.group.users ? props.group.users.map(mate => <div className="expense-list-filter-mate">{mate.name}</div>) : null} */}
-                    </div>
+
                 </div>
-                {expenses.length ? expenses.map(expense => <ExpenseRow key={expense.id} expense={expense} viewExpense={viewExpense} />)
+                {expenses.length ?
+                    (<div className="expense-row-list-container">
+                        {expenses.map(expense => <ExpenseRow key={expense.id} expense={expense} viewExpense={viewExpense} />)}
+                    </div>)
                 : null
                 }
             </div>
