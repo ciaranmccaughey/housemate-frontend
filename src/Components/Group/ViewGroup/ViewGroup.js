@@ -16,7 +16,7 @@ const ViewGroup = props => {
 
 	const { user } = useAuth();
 
-	const { group, showArea, categories, addMateToGroup } = props;
+	const { group, showArea, categories, addMateToGroup, onRemoveMate } = props;
 	const [view, setView] = useState("overview");
 	const [expenses, setExpenses] = useState([]);
 
@@ -56,7 +56,7 @@ const ViewGroup = props => {
 	}
 
 	if (view === "m8s") {
-		render = <Mate group={group} addMateToGroup={addMateToGroup} />;
+		render = <Mate group={group} addMateToGroup={addMateToGroup} onRemoveMate={onRemoveMate}/>;
 	}
 
 	if (view === "settings") {

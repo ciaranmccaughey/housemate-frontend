@@ -2,7 +2,7 @@ import React from "react";
 import MateRow from "./MateRow/MateRow";
 
 const MateList = props => {
-	const { mates } = props;
+	const { mates, viewMate, user } = props;
 
 	return (
 		<div >
@@ -12,9 +12,11 @@ const MateList = props => {
 			</div>
 			{mates ? (
 				<div className="expense-row-list-container">
-					{mates.map(mate => (
-						<MateRow key={mate.id} mate={mate} />
-					))}
+					{mates.map(mate => {
+						if (mate.id != user.id) {
+							return <MateRow key={mate.id} mate={mate} viewMate={viewMate} />;
+						}
+					})}
 				</div>
 			) : null}
 		</div>

@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import GroupNameForm from "./GroupNameForm";
 import { useAuth } from '../../auth-wrapper';
 import axios from '../../axios-instance';
-import Modal from "../Modal/Modal";
 
 const GroupSettings = props => {
 

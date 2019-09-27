@@ -20,10 +20,10 @@ class Group extends Component {
 	getGroups = async () => {
 		const res = await axios.get("group/index.php?action=getGroups");
 
-        if (res.data) {
+		if (res.data) {
 			const { data, success, message } = res.data;
 			if (success) {
-				console.log('grouos', data);
+				console.log("grouos", data);
 				this.setState({ groups: data });
 			}
 		}
@@ -41,7 +41,6 @@ class Group extends Component {
 	};
 
 	addMateToGroup = mate => {
-
 		// add mate to the selected group
 		const selectedGroup = this.state.selectedGroup;
 		selectedGroup.users.push(mate);
@@ -52,14 +51,13 @@ class Group extends Component {
 				return selectedGroup;
 			}
 			return group;
-		})
-		
+		});
+
 		this.setState({
 			groups: groups,
 			selectedGroup: selectedGroup
-		})
-
-	}
+		});
+	};
 
 	showArea = area => {
 		this.setState({ showArea: area });
@@ -71,26 +69,40 @@ class Group extends Component {
 
 	// delete the group from the group settings component
 	onDeleteGroup = groupDeleted => {
-		const updateGroups =  this.state.groups.filter(group => group.id != groupDeleted.id);
+		const updateGroups = this.state.groups.filter(group => group.id != groupDeleted.id);
 		this.setState({ showArea: "list", selectedGroup: null, groups: updateGroups });
-	}
+	};
 
 	// leave the group from the group settings component
 	onLeaveGroup = groupLeft => {
-		const updateGroups =  this.state.groups.filter(group => group.id != groupLeft.id);
+		const updateGroups = this.state.groups.filter(group => group.id != groupLeft.id);
 		this.setState({ showArea: "list", selectedGroup: null, groups: updateGroups });
-	}
+	};
+
+	onRemoveMate = (mateRemoved, groupToRemove) => {
+
+		let selectedGroupUpdated = null;
+		const updateGroups = this.state.groups.map(group => {
+			if (group.id == groupToRemove.id) {
+				group.users = group.users.filter(user => user.id != mateRemoved.id);
+				selectedGroupUpdated = group;
+			}
+			return group.users;
+		});
+		this.setState({ selectedGroup: selectedGroupUpdated, groups: updateGroups });
+
+	};
 
 	// update groups name from the group settings component
 	onGroupNameChange = groupChanged => {
-		const updateGroups =  this.state.groups.map((group) => {
+		const updateGroups = this.state.groups.map(group => {
 			if (group.id === groupChanged.id) {
 				group.name = groupChanged.name;
 			}
 			return group;
 		});
 		this.setState({ selectedGroup: groupChanged, groups: updateGroups });
-	}
+	};
 
 	addGroup = group => {
 		let groups = null;
@@ -99,8 +111,8 @@ class Group extends Component {
 		} else {
 			groups = [group];
 		}
-		this.setState({ groups: groups});
-	}
+		this.setState({ groups: groups });
+	};
 
 	render() {
 		let render = <GroupList groups={this.state.groups} showArea={this.showArea} groupSelected={this.groupSelected} />;
@@ -110,7 +122,19 @@ class Group extends Component {
 		}
 
 		if (this.state.showArea == "view") {
-			render = <ViewGroup group={this.state.selectedGroup} showArea={this.showArea} categories={this.state.categories} addMateToGroup={this.addMateToGroup} onDeleteGroup={this.onDeleteGroup} onLeaveGroup={this.onLeaveGroup} onGroupNameChange={this.onGroupNameChange} {...this.props}/>;
+			render = (
+				<ViewGroup
+					group={this.state.selectedGroup}
+					showArea={this.showArea}
+					categories={this.state.categories}
+					addMateToGroup={this.addMateToGroup}
+					onDeleteGroup={this.onDeleteGroup}
+					onLeaveGroup={this.onLeaveGroup}
+					onRemoveMate={this.onRemoveMate}
+					onGroupNameChange={this.onGroupNameChange}
+					{...this.props}
+				/>
+			);
 		}
 
 		return <>{render}</>;
