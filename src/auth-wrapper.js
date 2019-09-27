@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from './axios-instance';
 import Modal from "./Components/Modal/Modal";
 
-
 export const AuthContext = React.createContext();
 export const useAuth = () => useContext(AuthContext);
 
