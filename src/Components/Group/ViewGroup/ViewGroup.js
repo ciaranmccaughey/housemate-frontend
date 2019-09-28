@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Nav from "../../Nav/Nav";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons/faChevronLeft";
-import { faCog } from "@fortawesome/free-solid-svg-icons/faCog";
+
 import Expense from "../../Expense/Expense";
 import axios from "../../../axios-instance";
 import Mate from "../../Mate/Mate";
@@ -10,6 +8,7 @@ import "./ViewGroup.sass";
 import { useAuth } from "../../../auth-wrapper";
 import GroupSettings from "../../GroupSettings/GroupSettings";
 import GroupOverview from "../GroupOverview/GroupOverview";
+import Back from "../../Back/Back";
 
 
 const ViewGroup = props => {
@@ -64,17 +63,7 @@ const ViewGroup = props => {
 	}
 	return (
 		<div>
-			{false ? (
-				<div className="header-container">
-					<div className="back-icon">
-						<FontAwesomeIcon icon={faChevronLeft} onClick={() => showArea("list")} />
-					</div>
-					<span className="header-title">{group.name}</span>
-					<div className="back-icon">
-						<FontAwesomeIcon icon={faCog} />
-					</div>
-				</div>
-			) : null}
+			{view == "overview" ? <Back action={() => showArea('list')}/> : null}
 
 			<div className="app-bg">{render}</div>
 

@@ -9,11 +9,11 @@ const SelectPayer = ({ mates, setPayer }) => {
 	
 	return (
 		<>
-		<div style={{fontSize: "24px", fontWeight: "bold"}}>Who paid?</div>
+		<div style={{fontSize: "24px", fontWeight: "bold", marginBottom: "20px"}}>Who paid?</div>
 			{mates
 				? mates.map((mate, index) => {
 						return (
-							<div key={index} onClick={() => setSelected(index)} className={ index == selected ? 'box selected-payer-box' : 'box'} style={{ margin: "10px 5px" }}>
+							<div key={index} onClick={() => setSelected(index)} className={ index == selected ? 'box selected-payer-box' : 'box'} style={{ width: "100%" }}>
 								<div style={{display: 'flex', justifyContent: 'space-between',}}>
 									<div className={ index == selected ? 'selected-payer-icon' : ''}><FontAwesomeIcon icon={faCheckCircle} /></div>
 									<div className={ index == selected ? 'selected-payer-name' : ''}>{mate.name}</div>

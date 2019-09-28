@@ -53,7 +53,7 @@ const GroupSettings = props => {
 
 			</div>
 
-			<div style={{marginTop: "200px"}}>
+			<div className="expense-render-container">
 				<button type="submit" className="button is-warning" style={{ margin: "10px 5%", width: "90%" }} onClick={() => showModal('Leave Group', 'Are you sure you want to leave this group?', () => leaveGroup)}>
 					Leave Group
 				</button>

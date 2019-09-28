@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 import './Expense.sass';
 import ViewExpense from './ViewExpense/ViewExpense';
+import Back from '../Back/Back';
 
 const LIST = 'list';
 const ADD = 'add';
@@ -39,6 +40,9 @@ const Expense = props => {
 
     return (
         <div style={{ display: "flex", flexDirection: "column"}}>
+            {view == ADD ? <Back action={() => setView(LIST)}/> : null}
+            {view == VIEW_EXPENSE ? <Back action={() => setView(LIST)}/> : null}
+
             {view != ADD ? <button className="button is-link floating-button" onClick={() => setView(ADD)}><FontAwesomeIcon icon={faPlus} /></button> : null}
             {render}
         </div>

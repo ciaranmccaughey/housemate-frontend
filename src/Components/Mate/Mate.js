@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 import ViewMate from './ViewMate/ViewMate';
 import { useAuth } from '../../auth-wrapper';
+import Back from '../Back/Back';
 
 const Mate = props => {
 
@@ -35,6 +36,8 @@ const Mate = props => {
 
     return (
         <div style={{ display: "flex", flexDirection: "column" }}>
+            {view == 'add' || view == 'view' ? <Back action={() => setView('list')}/> : null}
+
             {view != 'add' ? <button className="button is-link floating-button" style={{ margin: "0 2%"}} onClick={() => setView('add')}><FontAwesomeIcon icon={faPlus} /></button> : null}
             {render}
         </div>
