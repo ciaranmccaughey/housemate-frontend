@@ -15,7 +15,7 @@ const Root = () => {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
 	return (
-		<BrowserRouter>
+		<BrowserRouter basename="/app">
 			<AuthWrapper >
 				<Switch>
 					<ProtectedRoute path="/" component={App} exact />

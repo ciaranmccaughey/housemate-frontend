@@ -1,18 +1,18 @@
 import React, { useState, useContext } from "react";
 import Signup from "../../Components/Signup/Signup";
 import Login from "../../Components/Login/Login";
-import Context from "../../context";
-import { Redirect } from 'react-router-dom';
+import logo from "../../images/logo.png";
 
 const Auth = () => {
-
-    const { state, dispatch } = useContext(Context);
 	const [showScreen, setShowScreen] = useState("login");
 	const [email, setEmail] = useState("");
 
-    return (
+	return (
 		<>
-			<div className="tabs is-centered" style={{ marginTop: "5em" }}>
+			<div style={{ display: "flex", justifyContent: "center", marginTop: "50px", marginBottom: "20px"}}>
+				<img src={logo} style={{maxWidth: "100px"}}/>
+			</div>
+			<div className="tabs is-centered" >
 				<ul>
 					<li onClick={() => setShowScreen("login")} className={showScreen == "login" ? "is-active" : null}>
 						<a>Login</a>
@@ -24,7 +24,6 @@ const Auth = () => {
 			</div>
 
 			{showScreen == "login" ? <Login email={email} /> : <Signup setEmail={setEmail} setShowScreen={setShowScreen} />}
-
 		</>
 	);
 };
