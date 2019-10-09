@@ -3,6 +3,7 @@ import AddGroup from "../../Components/Group/AddGroup/AddGroup";
 import GroupList from "../../Components/Group/GroupList/GroupList";
 import axios from "../../axios-instance";
 import ViewGroup from "../../Components/Group/ViewGroup/ViewGroup";
+import Back from "../../Components/Back/Back";
 
 class Group extends Component {
 	state = {
@@ -136,8 +137,10 @@ class Group extends Component {
 				/>
 			);
 		}
-
-		return <>{render}</>;
+		return (<div style={{ display: "flex", flexDirection: "column" }}>
+            {this.state.showArea == 'add' ? <Back action={() => this.setState({ showArea: 'list' })}/> : null}
+			{render}
+		</div>);
 	}
 }
 

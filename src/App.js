@@ -4,7 +4,6 @@ import Group from "./HOC/Group/Group";
 import { useAuth } from './auth-wrapper';
 import AddName from "./Components/AddName/AddName";
 
-
 function App() {
 	const { loading, user, logout, setUser } = useAuth();
 

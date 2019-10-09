@@ -3,7 +3,7 @@ import Group from "../../../HOC/Group/Group";
 import "./GroupView.sass";
 
 const GroupOverview = props => {
-	const { expenses, user, group, totalExpenses } = props;
+	const { expenses, user, group, totalExpenses, tasks } = props;
 
 	// calculate what you owe
 	let youHaveSpent = 0;
@@ -124,18 +124,6 @@ const GroupOverview = props => {
 									{youWerePaidBack}
 								</div>
 							</div>
-						</div>
-					</div>
-					<div className="recent-tasks-box">
-						<div className="recent-tasks-title">Recent Tasks Added</div>
-						<div className="recent-tasks-content-container">
-							<div className="recent-tasks-content">
-								<label className="myCheckbox">
-									<input type="checkbox"></input>
-									<span></span>
-								</label>
-							</div>
-							<div className="recent-tasks-content">Empty the bins</div>
 						</div>
 					</div>
 				</div>

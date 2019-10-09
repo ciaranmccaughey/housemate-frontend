@@ -18,7 +18,9 @@ const GroupNameForm = props => {
 
 		const res = await axios.post('group/index.php', postData)
 		const { data, success, message } = res.data;
-		
+
+		console.log(res.data);
+
         if (success) {
 			// update the group name
 			const updateGroup = {...group, name: values.name};

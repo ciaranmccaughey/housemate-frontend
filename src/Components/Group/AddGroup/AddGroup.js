@@ -29,47 +29,48 @@ const AddGroup = props => {
     }
 
 	return (
-		<div style={{margin: '5%'}}>
-			<Formik
-				initialValues={{ name: ""}}
-				onSubmit={(values, { setSubmitting }) => {
-                    onAddGroup(values);
-				}}
-				validationSchema={Yup.object().shape({
-					name: Yup.string()
-						.required("Required"),
-				})}
-			>
-				{formikProps => { 
-					const { values, touched, errors, dirty, isSubmitting, handleChange, handleBlur, handleSubmit, handleReset } = formikProps;
-					return (
-						<form onSubmit={handleSubmit}>
-							<div className="field">
-								<label className="label" htmlFor="name">
-									Name
-								</label>
-								<div className="control">
-									<input id="name" placeholder="Group Name" type="text" value={values.name} onChange={handleChange} onBlur={handleBlur} className={'input ' + (errors.name && touched.name ? 'is-danger' : '')} />
+		<>
+			<div className="expense-list-header" style={{ display: "flex", top: 0 }}>
+				<div className="expense-list-title">Add group</div>
+
+			</div>
+			<div className="expense-render-container">
+				<Formik
+					initialValues={{ name: ""}}
+					onSubmit={(values, { setSubmitting }) => {
+						onAddGroup(values);
+					}}
+					validationSchema={Yup.object().shape({
+						name: Yup.string()
+							.required("Required"),
+					})}
+				>
+					{formikProps => { 
+						const { values, touched, errors, dirty, isSubmitting, handleChange, handleBlur, handleSubmit, handleReset } = formikProps;
+						return (
+							<form onSubmit={handleSubmit}>
+								<div className="field">
+									<label className="label" htmlFor="name">
+										Name
+									</label>
+									<div className="control">
+										<input id="name" placeholder="Group Name" type="text" value={values.name} onChange={handleChange} onBlur={handleBlur} className={'input ' + (errors.name && touched.name ? 'is-danger' : '')} />
+									</div>
+									{errors.name && touched.name ? <p className="help is-danger">Please enter a name.</p> : null}
 								</div>
-								{errors.name && touched.name ? <p className="help is-danger">Please enter a name.</p> : null}
-							</div>
 
-							<button type="submit" className="button is-link"  style={{margin: "20px 5%", width: '90%'}}
-							// disabled={isSubmitting}
-							>
-								Add Group
-							</button>
+								<button type="submit" className="button is-link"  style={{margin: "20px 5%", width: '90%'}}
+								// disabled={isSubmitting}
+								>
+									Add Group
+								</button>
+							</form>
+						);
+					}}
+				</Formik>
+			</div>
+		</>
 
-							<button type="button" className="button"  style={{margin: "0 5% 5% 5%", width: '90%'}} onClick={() => showArea('list')}
-							// disabled={isSubmitting}
-							>
-								Cancel
-							</button>
-						</form>
-					);
-				}}
-			</Formik>
-		</div>
 	);
 };
 
