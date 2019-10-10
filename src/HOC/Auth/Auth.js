@@ -10,7 +10,7 @@ const Auth = () => {
 	return (
 		<>
 			<div style={{ display: "flex", justifyContent: "center", marginTop: "50px", marginBottom: "20px"}}>
-				<img src={logo} style={{maxWidth: "100px"}}/>
+				<img src={logo} style={{maxWidth: "100px", maxHeight: "100px"}}/>
 			</div>
 			<div className="tabs is-centered" >
 				<ul>
