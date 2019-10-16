@@ -8,7 +8,7 @@ const Modal = ({ children, closeModal, modalState, title, proceed }) => {
 	return(
 	  <div className="modal is-active">
 		<div className="modal-background" onClick={closeModal} />
-		<div className="modal-card">
+		<div className="modal-card" style={{maxWidth: "300px"}}>
 		  <header className="modal-card-head">
 			<p className="modal-card-title">{title}</p>
 			<button className="delete" onClick={closeModal} />

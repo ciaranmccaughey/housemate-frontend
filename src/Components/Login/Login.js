@@ -10,7 +10,7 @@ const Login = props => {
 	const [usernameOrPass, setUsernameOrPass] = useState(false);
 
 	return (
-		<div style={{ margin: "5%" }}>
+		<div style={{ margin: "auto", maxWidth: "400px" }}>
 			<Formik
 				initialValues={{ email: props.email, password: "" }}
 				onSubmit={ async (values, { setSubmitting }) => {
