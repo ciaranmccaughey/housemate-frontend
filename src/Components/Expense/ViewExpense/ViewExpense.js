@@ -1,14 +1,14 @@
 import React from "react";
 import './ViewExpense.sass';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons/faChevronLeft";
 import PaymentRow from './PaymentRow';
 import axios from "../../../axios-instance";
+import { useAuth } from "../../../auth-wrapper";
 
 const ViewExpense = props => {
 
 	// props
 	const { expenses, expense, setExpenses, setView } = props;
+	const { currencySymbol } = useAuth();
 
 
 	const setPaymentPaid = async (payment, paid) => {
@@ -88,7 +88,7 @@ const ViewExpense = props => {
 				<div className="expense-list-header" style={{ display: "flex" }}>
                     {/* <FontAwesomeIcon icon={faChevronLeft} onClick={() => console.log('clicked')} /> */}
 					<div className="expense-list-title">Expense</div>
-					<div className="expense-list-total">£{parseFloat(Math.round(expense.amount * 100) / 100).toFixed(2)}</div>
+					<div className="expense-list-total">{currencySymbol}{parseFloat(Math.round(expense.amount * 100) / 100).toFixed(2)}</div>
 					<div className="expense-list-total">{expense.category.name}</div>
 					<div className="expense-list-total">{expense.user.name}</div>
 					<div className="expense-list-total">{expense.purchased_date.split(' ')[0].split('-').reverse().join('-')}</div>

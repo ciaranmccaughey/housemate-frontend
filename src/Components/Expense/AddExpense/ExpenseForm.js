@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
-import ExpenseList from "../ExenseList/ExpenseList";
+import { useAuth } from '../../../auth-wrapper';
+
 import './AddExpense.sass';
 
 const ExpenseForm = props => {
 	const { addExpenseDetails } = props;
+	const { currencySymbol } = useAuth();
 
 	const [ splitExpense, setSplitExpense ] = useState();
 
@@ -42,7 +43,7 @@ const ExpenseForm = props => {
 
 							<div className="field">
 								<label className="label" htmlFor="email">
-									Amount ($)
+									Amount ({currencySymbol})
 								</label>
 								<div className="control">
 									<input id="amount" placeholder="Enter your Amount" type="number" value={values.amount} onChange={handleChange} onBlur={handleBlur} className={'input ' + (errors.amount && touched.amount ? 'is-danger' : '')} />

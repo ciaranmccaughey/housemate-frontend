@@ -33,7 +33,6 @@ class Split extends Component {
     };
 	render() {
 
-		console.log(this.props);
 		return (
 			<>
 				<div style={{ display: "flex", flexDirection: "column" }}>
@@ -46,7 +45,7 @@ class Split extends Component {
 								<div style={{display: 'flex', justifyContent: 'space-between',}}>
 									<div className='selected-split-icon'><FontAwesomeIcon icon={faCheckCircle} /></div>
 									<div className='selected-split-name'>{mate.name}</div>
-									<div>£{(Math.round(amount * 100) / 100).toFixed(2)}</div>
+									<div>{this.props.currencySymbol}{(Math.round(amount * 100) / 100).toFixed(2)}</div>
 								</div>
 							</div>
 							
@@ -59,7 +58,7 @@ class Split extends Component {
 								<div style={{ display: "flex", justifyContent: "space-between" }}>
 									<div><FontAwesomeIcon icon={faCheckCircle} /></div>
 									<div>{mate.name}</div>
-									<div>£0</div>
+									<div>{this.props.currencySymbol}0</div>
 								</div>
 							</div>
 						);

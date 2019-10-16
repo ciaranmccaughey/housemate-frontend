@@ -1,9 +1,11 @@
 import React from "react";
 import Group from "../../../HOC/Group/Group";
 import "./GroupView.sass";
+import { useAuth } from '../../../auth-wrapper';
 
 const GroupOverview = props => {
 	const { expenses, user, group, totalExpenses, tasks } = props;
+	const { currencySymbol } = useAuth();
 
 	// calculate what you owe
 	let youHaveSpent = 0;
@@ -80,7 +82,7 @@ const GroupOverview = props => {
 				<div className="group-view-name">{group.name}</div>
 				<div className="group-view-total-container">
 					<div>Total</div>
-					<div>${totalExpenses}</div>
+					<div>{currencySymbol}{totalExpenses}</div>
 				</div>
 				<div>
 					<div className="group-view-container">
@@ -89,7 +91,7 @@ const GroupOverview = props => {
 							<div className="group-box-content-container">
 								<div className="group-box-text">This is the total of what you have spent while in this group.</div>
 								<div className="group-box-amount">
-									<span style={{ fontSize: "10px" }}>£</span>
+									<span style={{ fontSize: "10px" }}>{currencySymbol}</span>
 									{youHaveSpent}
 								</div>
 							</div>
@@ -99,7 +101,7 @@ const GroupOverview = props => {
 							<div className="group-box-content-container">
 								<div className="group-box-text">This is the total of what you have spent while in this group.</div>
 								<div className="group-box-amount">
-									<span style={{ fontSize: "10px" }}>£</span>
+									<span style={{ fontSize: "10px" }}>{currencySymbol}</span>
 									{youOwe}
 								</div>
 							</div>
@@ -109,7 +111,7 @@ const GroupOverview = props => {
 							<div className="group-box-content-container">
 								<div className="group-box-text">This is the total of what you have spent while in this group.</div>
 								<div className="group-box-amount">
-									<span style={{ fontSize: "10px" }}>£</span>
+									<span style={{ fontSize: "10px" }}>{currencySymbol}</span>
 									{youAreOwed}
 								</div>
 							</div>
@@ -120,7 +122,7 @@ const GroupOverview = props => {
 							<div className="group-box-content-container">
 								<div className="group-box-text">This is the total of what you have spent while in this group.</div>
 								<div className="group-box-amount">
-									<span style={{ fontSize: "10px" }}>£</span>
+									<span style={{ fontSize: "10px" }}>{currencySymbol}</span>
 									{youWerePaidBack}
 								</div>
 							</div>

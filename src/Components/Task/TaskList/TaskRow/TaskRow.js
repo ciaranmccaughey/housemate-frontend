@@ -6,7 +6,7 @@ const TaskRow = ({ task, taskCompleteToggle }) => {
                 <div className="expense-row-header">
                     <div className="expense-row-container">
                         <div>
-                        <label class="container">
+                        <label className="container">
                             <input type="checkbox" defaultChecked={task.completed == 't' ? true : false} onChange={(e) => taskCompleteToggle(task, e)} />
                             <span className="checkmark"></span>
                         </label>

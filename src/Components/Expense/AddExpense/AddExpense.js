@@ -10,7 +10,7 @@ const ADD_PLAYER = "addPayer";
 const SPLIT = "split";
 
 const AddExpense = props => {
-	const { user } = useAuth();
+	const { user, currencySymbol } = useAuth();
 
 	const [expense, setExpense] = useState();
 	const [view, setAddExpenseView] = useState(FORM);
@@ -83,7 +83,7 @@ const AddExpense = props => {
 	}
 
 	if (view == SPLIT) {
-		render = <Split mates={props.group.users} expense={expense} addExpense={addExpense} />;
+		render = <Split mates={props.group.users} expense={expense} addExpense={addExpense} currencySymbol={currencySymbol} />;
 	}
 
 	return (

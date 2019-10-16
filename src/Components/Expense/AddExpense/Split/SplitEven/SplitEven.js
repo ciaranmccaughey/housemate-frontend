@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle';
+import { useAuth } from '../../../../../auth-wrapper';
+
 
 const SplitEven = props => {
-    // const { mates } = props;
-	// state = {
-	// 	mates: this.props.mates,
-	// 	expense: this.props.expense,
-	// 	numberOfMates: this.props.mates.length,
-	// 	excludeMates: []
-    // };
     
     const [ mates, setMates ] = useState(props.mates);
     const [ excludeMates, setExcludeMates ] = useState([]);
     const [ numberOfMates, setNumberOfMates ] = useState(props.mates.length);
+    const { currencySymbol } = useAuth();
     
 
     const removeMate = mateToRemove => {
@@ -55,7 +51,7 @@ const SplitEven = props => {
                             </div>
                             
                             <div>{mate.name}</div>
-                            <div>£{(Math.round(amount * 100) / 100).toFixed(2)}</div>
+                            <div>{currencySymbol}{(Math.round(amount * 100) / 100).toFixed(2)}</div>
                         </div>
                     </div>
                 );
@@ -71,7 +67,7 @@ const SplitEven = props => {
                             </div>
                             
                             <div>{mate.name}</div>
-                            <div>£0</div>
+                            <div>{currencySymbol}0</div>
                         </div>
                     </div>
                 );

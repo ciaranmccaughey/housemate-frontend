@@ -10,6 +10,7 @@ export const AuthWrapper = ({ children }) => {
 // state
   const [isAuthenticated, setIsAuthenticated] = useState();
   const [user, setUser] = useState();
+  const [currencySymbol, setCurrencySymbol] = useState();
   const [loading, setLoading] = useState(true);
 
   // modal
@@ -31,6 +32,7 @@ export const AuthWrapper = ({ children }) => {
 
         if (user) {
           setUser(user);
+          setCurrencySymbol(user.currency_symbol);
           setIsAuthenticated(true);
           setLoading(false);
           return;
@@ -41,12 +43,13 @@ export const AuthWrapper = ({ children }) => {
       if (isAuthenticated) {
         const { user, token} = await createOrGetUserAndToken();
         localStorage.setItem('tokenhousem8', token);
-
         setUser(user);
+        setCurrencySymbol(user.currency_symbol);
       }
 
     };
     initAuth();
+
     // eslint-disable-next-line
   }, []);
 
@@ -64,7 +67,7 @@ export const AuthWrapper = ({ children }) => {
     
     const res = await axios.post('auth/index.php', {action: 'get_user'});
     const { data } = res.data;
-
+    
     return data;
   }
 
@@ -84,6 +87,7 @@ export const AuthWrapper = ({ children }) => {
       localStorage.setItem('tokenhousem8', token);
 
       setUser(user);
+      setCurrencySymbol(user.currency_symbol);
       setIsAuthenticated(true);
       setLoading(false);
 
@@ -99,9 +103,9 @@ export const AuthWrapper = ({ children }) => {
 		};
 
 		const res = await axios.post("auth/index.php", postData);
-		const { data, success, message } = res.data;
-
-    return success;
+    const { data, success, message } = res.data;
+    
+    return {success, message};
 
   };
   
@@ -124,6 +128,7 @@ export const AuthWrapper = ({ children }) => {
       value={{
         isAuthenticated,
         user,
+        currencySymbol,
         loading,
         logout,
         loginSubmit,

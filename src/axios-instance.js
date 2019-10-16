@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'https://frozen-falls-50114.herokuapp.com/api/';
-// const API_URL = 'http://housem8.local/api/';
+// const API_URL = 'https://www.housem8.app/api/';
+const API_URL = 'http://housem8.local/api/';
 
 const instance = axios.create({
     baseURL: API_URL,
