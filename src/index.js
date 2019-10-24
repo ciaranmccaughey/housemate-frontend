@@ -5,14 +5,10 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ProtectedRoute from "./Components/ProtectedRoute";
-import Context from "./context";
-import reducer from "./reducer";
 
 import { AuthWrapper } from './auth-wrapper';
 
 const Root = () => {
-	const initialState = useContext(Context);
-	const [state, dispatch] = useReducer(reducer, initialState);
 
 	return (
 		<BrowserRouter basename="/app">
