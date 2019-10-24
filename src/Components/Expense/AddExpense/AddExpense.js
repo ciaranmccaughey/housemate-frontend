@@ -74,15 +74,15 @@ const AddExpense = props => {
 	};
 
 	let render = null;
-	if (view == FORM) {
+	if (view === FORM) {
 		render = <ExpenseForm {...props} addExpenseDetails={addExpenseDetails} setView={setAddExpenseView} />;
 	}
 
-	if (view == ADD_PLAYER) {
+	if (view === ADD_PLAYER) {
 		render = <AddPayer mates={props.group.users} setPayer={setPayer} />;
 	}
 
-	if (view == SPLIT) {
+	if (view === SPLIT) {
 		render = <Split mates={props.group.users} expense={expense} addExpense={addExpense} currencySymbol={currencySymbol} />;
 	}
 

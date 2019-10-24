@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from './axios-instance';
 import Modal from "./Components/Modal/Modal";
-
+// import { DotLoader } from 'react-spinners';
+// import { css } from '@emotion/core';
+ 
 export const AuthContext = React.createContext();
 export const useAuth = () => useContext(AuthContext);
 
@@ -121,6 +123,7 @@ export const AuthWrapper = ({ children }) => {
     setModalMessage(message);
     setModalProceed(proceed);
   }
+
 
 
   return (

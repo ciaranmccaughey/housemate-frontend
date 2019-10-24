@@ -24,21 +24,21 @@ const Mate = props => {
 
 
     let render = null;
-    if (view == 'list') {
+    if (view === 'list') {
         render = <MateList mates={group.users} viewMate={viewMate} user={user}/>
     }
-    if (view == 'add') {
+    if (view === 'add') {
         render = <AddMate group={group} addMateToGroup={addMateToGroup} setView={setView} />
     }
-    if (view == 'view') {
+    if (view === 'view') {
         render = <ViewMate mate={mate} setView={setView} {...props} />
     }
 
     return (
         <div style={{ display: "flex", flexDirection: "column" }}>
-            {view == 'add' || view == 'view' ? <Back action={() => setView('list')}/> : null}
+            {view === 'add' || view == 'view' ? <Back action={() => setView('list')}/> : null}
 
-            {view != 'add' ? <button className="button is-link floating-button" style={{ margin: "0 2%"}} onClick={() => setView('add')}><FontAwesomeIcon icon={faPlus} /></button> : null}
+            {view !== 'add' ? <button className="button is-link floating-button" style={{ margin: "0 2%"}} onClick={() => setView('add')}><FontAwesomeIcon icon={faPlus} /></button> : null}
             {render}
         </div>
     )

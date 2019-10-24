@@ -20,7 +20,6 @@ instance.interceptors.request.use(function (config) {
       config.headers.token = token;
     }
 
-    console.log('called', token);
     // Do something before request is sent
     return config;
   }, function (error) {

@@ -6,14 +6,13 @@ import { useAuth } from "../../../auth-wrapper";
 
 const GroupList = props => {
 
-	const { logout } = useAuth();
 	return (
 		<div style={{ display: "flex", flexDirection: "column"}}>
-					<button type="button" onClick={() => logout()}>Logout</button>
 
 			<div className="list-container" onClick={() => console.log('clicked')}>
 				<div className="expense-list-header" style={{ display: "flex" }}>
 					<div className="expense-list-title" >Your Groups</div>
+					<div className="expense-list-total">Add groups here.</div>
 				</div>
 				{props.groups.length ? (
 					<>

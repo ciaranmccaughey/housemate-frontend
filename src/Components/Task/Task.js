@@ -8,27 +8,27 @@ import TaskList from './TaskList/TaskList';
 
 const Task = props => {
 
-    const { group, tasks } = props;
+    const { tasks } = props;
     const { user } = useAuth();
 
     const [view, setView] = useState('list');
 
     let render = null;
-    if (view == 'list') {
+    if (view === 'list') {
         render = <TaskList tasks={tasks} user={user} />
 
     }
-    if (view == 'add') {
+    if (view === 'add') {
         render = <AddTask user={user} {...props} setView={setView} />
     }
-    if (view == 'view') {
+    if (view === 'view') {
     }
 
     return (
         <div style={{ display: "flex", flexDirection: "column" }}>
-            {view == 'add' ? <Back action={() => setView('list')}/> : null}
+            {view === 'add' ? <Back action={() => setView('list')}/> : null}
 
-            {view != 'add' ? <button className="button is-link floating-button" style={{ margin: "0 2%"}} onClick={() => setView('add')}><FontAwesomeIcon icon={faPlus} /></button> : null}
+            {view !== 'add' ? <button className="button is-link floating-button" style={{ margin: "0 2%"}} onClick={() => setView('add')}><FontAwesomeIcon icon={faPlus} /></button> : null}
             {render}
         </div>
     )

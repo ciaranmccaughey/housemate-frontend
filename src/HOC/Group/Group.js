@@ -4,6 +4,10 @@ import GroupList from "../../Components/Group/GroupList/GroupList";
 import axios from "../../axios-instance";
 import ViewGroup from "../../Components/Group/ViewGroup/ViewGroup";
 import Back from "../../Components/Back/Back";
+import UserSettings from '../../Components/UserSettings/UserSettings';
+
+import { faCog } from "@fortawesome/free-solid-svg-icons/faCog";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Group extends Component {
 	state = {
@@ -84,12 +88,13 @@ class Group extends Component {
 
 		let selectedGroupUpdated = null;
 		const updateGroups = this.state.groups.map(group => {
-			if (group.id == groupToRemove.id) {
-				group.users = group.users.filter(user => user.id != mateRemoved.id);
+			if (group.id === groupToRemove.id) {
+				group.users = group.users.filter(user => user.id !== mateRemoved.id);
 				selectedGroupUpdated = group;
 			}
-			return group.users;
+			return group;
 		});
+
 		this.setState({ selectedGroup: selectedGroupUpdated, groups: updateGroups });
 
 	};
@@ -137,7 +142,14 @@ class Group extends Component {
 				/>
 			);
 		}
+
+		if (this.state.showArea == "settings") {
+			render = <UserSettings showArea={this.showArea}  />;
+		}
 		return (<div style={{ display: "flex", flexDirection: "column" }}>
+			{this.state.showArea == 'list' ? <div className="cog-icon">
+				<FontAwesomeIcon icon={faCog} onClick={() => this.setState({ showArea: 'settings' })}  />
+			</div> : null}
             {this.state.showArea == 'add' ? <Back action={() => this.setState({ showArea: 'list' })}/> : null}
 			{render}
 		</div>);

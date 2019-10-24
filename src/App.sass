@@ -14,6 +14,9 @@ $purple: #6155AE
 $test-primary: #fa7c91;
 $is-link: #6155AE
 
+$break-medium: 900px;
+
+
 
 // Update Bulma's global variables
 $family-sans-serif: 'Nunito', sans-serif;
@@ -30,8 +33,9 @@ $my-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.2), 0 0 0 1px rgba(10, 10, 10, 0.1)
 // Import only what you need from Bulma
 @import "../node_modules/bulma/bulma.sass"
 
-.app-bg 
-    // background: $link;
+@media screen and ( min-width:  $break-medium)
+    .app-bg 
+        margin-left: 70px
 
 .floating-button
     border-radius: 50%
