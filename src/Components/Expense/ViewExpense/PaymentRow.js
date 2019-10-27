@@ -8,7 +8,7 @@ const PaymentRow = props => {
 
 	let paymentDetails = (
 		<div className="payments-payment-details">
-			<div>{payment.user.name} owes {expense.user.name}</div>
+			<div>{payment.user.name} <span style={{ color: "red" }}>owes</span> {expense.user.name}</div>
 			<div>{currencySymbol}{payment.amount}</div>
 		</div>
 	);
@@ -16,7 +16,7 @@ const PaymentRow = props => {
 	if (payment.paid == "t") {
 		paymentDetails = (
 			<div className="payments-payment-details">
-				<div>{payment.user.name} paid {expense.user.name}</div>
+				<div>{payment.user.name} <span style={{color: "green"}}>paid</span> {expense.user.name}</div>
 				<div>{currencySymbol}{payment.amount}</div>
 			</div>)
 	}

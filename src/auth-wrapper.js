@@ -103,8 +103,7 @@ export const AuthWrapper = ({ children }) => {
 			...values,
 			action: "signup"
 		};
-
-		const res = await axios.post("auth/index.php", postData);
+    const res = await axios.post("auth/index.php", postData);
     const { data, success, message } = res.data;
     
     return {success, message};

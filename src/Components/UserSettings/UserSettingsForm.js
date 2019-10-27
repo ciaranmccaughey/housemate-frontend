@@ -17,6 +17,7 @@ const UserSettingsForm = props => {
 
         const postData = {
 			action: "update_user",
+			id: user.id,
 			...values
            
         }
@@ -93,7 +94,7 @@ const UserSettingsForm = props => {
 
 							</div>
 
-							<button type="submit" className="button is-link"  style={{margin: "5px 5%", width: '90%'}} disabled={isSubmitting} >
+							<button type="submit" className="button is-link"  style={{margin: "5px 5%", width: '90%'}}  >
 								Update
 							</button>
 						</form>

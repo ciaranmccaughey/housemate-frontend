@@ -42,6 +42,7 @@ const Signup = props => {
 				onSubmit={async (values, { setSubmitting }) => {
 					
 					const { success, message } = await signupSubmit({...values, 'group_pin': groupPin});
+					console.log('Signup: ', success, message);
 					if (success) {
 						setEmail(values.email);
 						setShowScreen('login');
