@@ -36,7 +36,7 @@ const Signup = props => {
 	}
 
 	return (
-		<div style={{ margin: "auto", maxWidth: "400px" }}>
+		<div style={{ margin: "auto", maxWidth: "370px" }}>
 			<Formik
 				initialValues={{ name: "", email: "", password: "", currency_id: "" }}
 				onSubmit={async (values, { setSubmitting }) => {
