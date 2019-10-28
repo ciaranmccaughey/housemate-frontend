@@ -38,11 +38,11 @@ const Signup = props => {
 	return (
 		<div style={{ margin: "auto", maxWidth: "370px" }}>
 			<Formik
-				initialValues={{ name: "", email: "", password: "", currency_id: "" }}
+				initialValues={{ name: "", email: "", password: "", password_confirmation: "", currency_id: "" }}
 				onSubmit={async (values, { setSubmitting }) => {
 					
 					const { success, message } = await signupSubmit({...values, 'group_pin': groupPin});
-					console.log('Signup: ', success, message);
+
 					if (success) {
 						setEmail(values.email);
 						setShowScreen('login');
@@ -53,7 +53,10 @@ const Signup = props => {
 				validationSchema={Yup.object().shape({
 					name: Yup.string().required("Required"),
 					email: Yup.string().required("Required"),
-					password: Yup.string().required("Required"),
+					password: Yup.string().required("Password is required.").min(5, 'Password must be a minimum of 5 characters'),
+					password_confirmation: Yup.string().required("Password is required").min(5, 'Password must be a minimum of 5 characters').test('passwords-match', 'Passwords don\'t match', function(value) {
+						return this.parent.password === value;
+					  }),
 					currency_id: Yup.string().required("Required")
 				})}
 			>
@@ -113,7 +116,25 @@ const Signup = props => {
 										className={"input " + (errors.password && touched.password ? "is-danger" : "")}
 									/>
 								</div>
-								{errors.password && touched.password ? <p className="help is-danger">Please enter a password.</p> : null}
+								{errors.password && touched.password ? <p className="help is-danger">{errors.password}</p> : null}
+							</div>
+
+							<div className="field">
+								<label className="label" htmlFor="name">
+								Password Confirmation
+								</label>
+								<div className="control">
+									<input
+										id="password_confirmation"
+										placeholder="Password"
+										type="password"
+										value={values.password_confirmation}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										className={"input " + (errors.password_confirmation && touched.password_confirmation ? "is-danger" : "")}
+									/>
+								</div>
+								{errors.password_confirmation && touched.password_confirmation ? <p className="help is-danger">{errors.password_confirmation}</p> : null}
 							</div>
 
 							<div className="field">
